@@ -122,5 +122,10 @@ $(document).ready(function() {
 		$(divToExpand).toggle();
 	})
 
+	$("input.speedControl").change(function() {
+		minutesPerTick = $(".speedControl").val();
+		$("span.speedControl.display").html(minutesPerTick + " minutes per tick");
+	})
+
 	startGame();
 });
