@@ -7,7 +7,14 @@ var startGame = function() {
 }
 
 var defineUIElements = function () {
-	$statsPane = $('.statsOutput');
+	$statsPane = 		$('.statsOutput'),
+	$statNumRaccoons = 	$('.stat.numRaccoons'),
+	$statNumHumans = 	$('.stat.numHumans'),
+	$statSeason = 		$('.stat.season'),
+	$statDate = 		$('.stat.date'),
+	$statTime = 		$('.stat.time'),
+	$statFood =			$('.stat.food');
+
 	$actionsPane = $('.actions');
 	console.log($actionsPane);
 }
@@ -17,12 +24,18 @@ var prepUI = function() {
 }
 
 var updateStatsPane = function() {
-	var statsHTML = "Trash King Army: " + getTotalRaccoons() + "<br />";
-	statsHTML += "Human population of the continental United States: " + humans + "<br />";
-	statsHTML += "Current season: " + getSeason(date) + "<br />";
-	statsHTML += "It's " + getHoursMinutesString(date) + " on " + getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() + "<br />";
-	statsHTML += "Food stores: " + foodStores.toFixed(1);
-	$statsPane.html(statsHTML);
+	$statNumRaccoons.html( getTotalRaccoons() );
+	$statNumHumans.html( humans );
+	$statSeason.html( getSeason(date) );
+	$statDate.html( getHoursMinutesString(date) );
+	$statTime.html( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
+	$statFood.html( foodStores.toFixed(1) );
+
+	// statsHTML += "Human population of the continental United States: " + humans + "<br />";
+	// statsHTML += "Current season: " + getSeason(date) + "<br />";
+	// statsHTML += "It's " + getHoursMinutesString(date) + " on " + getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() + "<br />";
+	// statsHTML += "Food stores: " + foodStores.toFixed(1);
+	// $statsPane.html(statsHTML);
 }
 
 var updateActionsPane = function() {
