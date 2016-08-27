@@ -8,12 +8,12 @@ var startGame = function() {
 
 var defineUIElements = function () {
 	$statsPane = 		$('.statsOutput'),
-	$statNumRaccoons = 	$('.stat.numRaccoons'),
-	$statNumHumans = 	$('.stat.numHumans'),
-	$statSeason = 		$('.stat.season'),
-	$statDate = 		$('.stat.date'),
-	$statTime = 		$('.stat.time'),
-	$statFood =			$('.stat.food');
+	$statNumRaccoons = 	$('.numRaccoons .stat'),
+	$statNumHumans = 	$('.numHumans .stat'),
+	$statSeason = 		$('.season .stat'),
+	$statDate = 		$('.date .stat'),
+	$statTime = 		$('.time .stat'),
+	$statFood =			$('.food .stat');
 
 	$actionsPane = $('.actions');
 	console.log($actionsPane);
@@ -107,6 +107,18 @@ $(document).ready(function() {
 		console.log("Clicked breed button");
 		breedRaccoons();
 	});
+
+	$(".statExpander").click(function(e) {
+		console.log(e.target);
+		if ($(e.target).html() === '[v]') {
+			$(e.target).html('[^]');
+		} else {
+			$(e.target).html('[v]');
+		}
+		var chosenStat = $(e.target).data('stat');
+		var divToExpand = $('.expandedStat[data-stat=' + chosenStat + ']');
+		$(divToExpand).toggle();
+	})
 
 	startGame();
 });

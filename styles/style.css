@@ -37,6 +37,17 @@ body {
 	margin-bottom: 2px;
 }
 
+.statExpander {
+	font-size: 0.8em;
+	background-color: rgba(50,50,50, .2);
+	cursor: pointer;
+}
+
+.expandedStat {
+	background-color: rgba(50, 50, 50, .2);
+	display: none;
+}
+
 .progressBar {
 	display: inline-block;
 	vertical-align: bottom;
