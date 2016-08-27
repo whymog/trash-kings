@@ -7,13 +7,14 @@ var startGame = function() {
 }
 
 var defineUIElements = function () {
-	$statsPane = 		$('.statsOutput'),
-	$statNumRaccoons = 	$('.numRaccoons .stat'),
-	$statNumHumans = 	$('.numHumans .stat'),
-	$statSeason = 		$('.season .stat'),
-	$statDate = 		$('.date .stat'),
-	$statTime = 		$('.time .stat'),
-	$statFood =			$('.food .stat');
+	$statsPane = 			$('.statsOutput'),
+	$statNumRaccoons = 		$('.numRaccoons .stat'),
+	$expandedNumRaccoons = 	$('.numRaccoons .expandedStat'),
+	$statNumHumans = 		$('.numHumans .stat'),
+	$statSeason = 			$('.season .stat'),
+	$statDate = 			$('.date .stat'),
+	$statTime = 			$('.time .stat'),
+	$statFood =				$('.food .stat');
 
 	$actionsPane = $('.actions');
 	console.log($actionsPane);
@@ -24,12 +25,15 @@ var prepUI = function() {
 }
 
 var updateStatsPane = function() {
-	$statNumRaccoons.html	( getTotalRaccoons() );
-	$statNumHumans.html		( humans );
-	$statSeason.html		( getSeason(date) );
-	$statDate.html			( getHoursMinutesString(date) );
-	$statTime.html			( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
-	$statFood.html			( foodStores.toFixed(1) );
+	$statNumRaccoons.html		( getTotalRaccoons() );
+	$expandedNumRaccoons.html 	( "Adults: " + getAdultRaccoons().length + " (" + 
+								  	getAdultFemaleRaccoons().length + " females, " + getAdultMaleRaccoons().length + " males)<br />" +
+								  "Children: " + getChildRaccoons().length );
+	$statNumHumans.html			( humans );
+	$statSeason.html			( getSeason(date) );
+	$statDate.html				( getHoursMinutesString(date) );
+	$statTime.html				( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
+	$statFood.html				( foodStores.toFixed(1) );
 }
 
 var updateActionsPane = function() {
@@ -104,12 +108,10 @@ var tick = function() {
 
 $(document).ready(function() {
 	$("#breedBtn").click(function() {
-		console.log("Clicked breed button");
 		breedRaccoons();
 	});
 
 	$(".statExpander").click(function(e) {
-		console.log(e.target);
 		if ($(e.target).html() === '[v]') {
 			$(e.target).html('[^]');
 		} else {
