@@ -4,19 +4,30 @@ body {
 	font-family: "Courier New", monospace;
 }
 
-#leftPane, #rightPane {
+#leftPane, #centerPane, #rightPane {
 	margin: 0px;
 	display: inline-block;
-	width: 50%;
+	width: 33%;
+	float: left;
+	/*padding: 4px;*/
+}
+
+.paneInner {
+	padding: 4px;
 }
 
 #leftPane {
-	background-color: #EEEEEF;
+	background-color: #EEEEF4;
+}
+
+#centerPane {
+	background-color: #F4EEEE;
+	width: 34%;
 }
 
 #rightPane {
-	float: right;
-	background-color: #EEEFEE;
+	/*float: right;*/
+	background-color: #EEF4EE;
 }
 
 .paneTitle {

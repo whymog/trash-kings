@@ -24,18 +24,12 @@ var prepUI = function() {
 }
 
 var updateStatsPane = function() {
-	$statNumRaccoons.html( getTotalRaccoons() );
-	$statNumHumans.html( humans );
-	$statSeason.html( getSeason(date) );
-	$statDate.html( getHoursMinutesString(date) );
-	$statTime.html( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
-	$statFood.html( foodStores.toFixed(1) );
-
-	// statsHTML += "Human population of the continental United States: " + humans + "<br />";
-	// statsHTML += "Current season: " + getSeason(date) + "<br />";
-	// statsHTML += "It's " + getHoursMinutesString(date) + " on " + getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() + "<br />";
-	// statsHTML += "Food stores: " + foodStores.toFixed(1);
-	// $statsPane.html(statsHTML);
+	$statNumRaccoons.html	( getTotalRaccoons() );
+	$statNumHumans.html		( humans );
+	$statSeason.html		( getSeason(date) );
+	$statDate.html			( getHoursMinutesString(date) );
+	$statTime.html			( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
+	$statFood.html			( foodStores.toFixed(1) );
 }
 
 var updateActionsPane = function() {

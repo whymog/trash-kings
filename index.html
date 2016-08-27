@@ -16,43 +16,54 @@
 </head>
 <body>
 	<div id="leftPane">
-		<div class="statsPane">
-			<span class="paneTitle">STATS:</span>
-			<div class="statsOutput">
-				<div class="statLabel">Trash King Army: 
-					<span class="stat numRaccoons"></span>
-				</div>
-				<div class="statLabel">Human population of the continental U.S.: 
-					<span class="stat numHumans"></span>
-				</div>
-				<div class="statLabel">Current season: 
-					<span class="stat season"></span>
-				</div>
-				<div class="statLabel">Current time: 
-					<span class="stat time"></span>
-				</div>
-				<div class="statLabel">Current date: 
-					<span class="stat date"></span>
-				</div>
-				<div class="statLabel">Food stores: 
-					<span class="stat food"></span>
+		<div class="paneInner">
+			<!-- Contains: Stats, Resources -->
+			<div class="statsPane">
+				<span class="paneTitle">STATS:</span>
+				<div class="statsOutput">
+					<div class="statLabel">Trash King Army: 
+						<span class="stat numRaccoons"></span>
+					</div>
+					<div class="statLabel">Human Population (U.S.): 
+						<span class="stat numHumans"></span>
+					</div>
+					<div class="statLabel">Current season: 
+						<span class="stat season"></span>
+					</div>
+					<div class="statLabel">Current time: 
+						<span class="stat time"></span>
+					</div>
+					<div class="statLabel">Current date: 
+						<span class="stat date"></span>
+					</div>
+					<div class="statLabel">Food stores: 
+						<span class="stat food"></span>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="actions">
-			<span class="paneTitle">ACTIONS:</span>
-			<div class="action breed">
-				<button id="breedBtn">Breed</button>
-				<span id="breedBar"></span>
-			</div>
-			<div class="action getTrash">
-				<button id="getTrashBtn">Get Trash</button>
-				<span id="getTrashDescription"></span>
+	</div>
+	<div id="centerPane">
+		<div class="paneInner">
+			<!-- Contains: Actions -->
+			<div class="actions">
+				<span class="paneTitle">ACTIONS:</span>
+				<div class="action breed">
+					<button id="breedBtn">Breed</button>
+					<span id="breedBar"></span>
+				</div>
+				<div class="action getTrash">
+					<button id="getTrashBtn">Get Trash</button>
+					<span id="getTrashDescription"></span>
+				</div>
 			</div>
 		</div>
 	</div>
 	<div id="rightPane">
-		<div id="messageWindow"></div>
+		<div class="paneInner">
+			<!-- Contains: Output -->
+			<div id="messageWindow"></div>
+		</div>
 	</div>
 </body>
 </html>
