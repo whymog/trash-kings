@@ -5,6 +5,7 @@ var raccoons = [
 		sex: "male",
 		birthday: new Date("December 19, 2016 6:00:00"),
 		pregnant: false,
+		assignment: "unassigned",
 		alive: true
 	},
 	{
@@ -13,6 +14,7 @@ var raccoons = [
 		sex: "female",
 		birthday: new Date("December 19, 2016 6:00:00"),
 		pregnant: false,
+		assignment: "unassigned",
 		alive: true
 	},
 	{
@@ -21,6 +23,7 @@ var raccoons = [
 		sex: "male",
 		birthday: new Date("December 19, 2016 6:00:00"),
 		pregnant: false,
+		assignment: "unassigned",
 		alive: true
 	},
 	{
@@ -29,6 +32,7 @@ var raccoons = [
 		sex: "female",
 		birthday: new Date("December 19, 2016 6:00:00"),
 		pregnant: false,
+		assignment: "unassigned",
 		alive: true
 	},
 	{
@@ -37,6 +41,7 @@ var raccoons = [
 		sex: "female",
 		birthday: new Date("December 19, 2016 6:00:00"),
 		pregnant: false,
+		assignment: "unassigned",
 		alive: true
 	}
 ];

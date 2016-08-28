@@ -1,5 +1,9 @@
 /**** Math getters ****/
 
+var getAge = function(raccoon) {
+	return Math.abs(date - raccoon.birthday);
+}
+
 var getTotalRaccoons = function() {
 	return raccoons.length;
 }
@@ -84,8 +88,23 @@ var getChildFemaleRaccoons = function() {
 	return childFemales;
 }
 
-var getAge = function(raccoon) {
-	return Math.abs(date - raccoon.birthday);
+// Assignments
+
+var getAssignments = function(assignment) {
+	// If no assignment is specified, return an object containing all assignments and 
+	// the number of raccoons assigned to each.
+	// If an assignment _is_ specified, just return the raccoons with that assignment
+	if (assignment) {
+		var assignedRaccoons = [];
+		for (var i = 0; i < raccoons.length; i ++) {
+			if (raccoons[i].assignment === assignment) {
+				assignedRaccoons.push(raccoons[i]);
+			}
+		}
+		return assignedRaccoons;
+	}
+	// Else if no assignment is specified...
+	// TODO
 }
 
 // Date and Time

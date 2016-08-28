@@ -99,6 +99,7 @@ var spawnBabyRaccoons = function() {
 				sex: Math.random() > 0.5 ? "female" : "male",
 				birthday: date,
 				pregnant: false,
+				assignment: "unassigned",
 				alive: true
 			};
 			babies.push(newRaccoon);

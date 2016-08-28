@@ -16,6 +16,8 @@ var defineUIElements = function () {
 	$statTime = 			$('.time .stat'),
 	$statFood =				$('.food .stat');
 
+	$assignmentsPane = 		$('.assignments');
+
 	$actionsPane = $('.actions');
 	console.log($actionsPane);
 }
@@ -38,6 +40,10 @@ var updateStatsPane = function() {
 	$statDate.html				( getHoursMinutesString(date) );
 	$statTime.html				( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
 	$statFood.html				( foodStores.toFixed(1) );
+}
+
+var updateAssignmentsPane = function() {
+	$('.numUnassigned').html(getAssignments("unassigned").length + " raccoons are unassigned");
 }
 
 var updateActionsPane = function() {
@@ -103,6 +109,7 @@ var tick = function() {
 		updateHumanPopulation();
 		updateStores();
 		updateStatsPane();
+		updateAssignmentsPane();
 		updateActionsPane();
 		updateProgressBars();
 
