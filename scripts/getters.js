@@ -104,7 +104,20 @@ var getAssignments = function(assignment) {
 		return assignedRaccoons;
 	}
 	// Else if no assignment is specified...
-	// TODO
+	else {
+		var jobs = ["unassigned", "gatherTwigs", "gatherFood"];
+		var assignments = {};
+		for (var i = 0; i < jobs.length; i++) {
+			var thisJob = jobs[i],
+				numWithThisJob = 0;
+			for (var j = 0; j < raccoons.length; j++) {
+				if(raccoons[j].assignment === jobs[i]) {
+					numWithThisJob ++;
+				}
+			}
+			assignments[thisJob] = numWithThisJob;
+		}
+	}
 }
 
 // Date and Time
