@@ -64,6 +64,26 @@ var getAdultFemaleRaccoons = function() {
 	return adultFemales;
 }
 
+var getChildMaleRaccoons = function() {
+	var childMales = [];
+	for (var i = 0; i < raccoons.length; i ++) {
+		if (raccoons[i].sex === "male" && getAge(raccoons[i]) < new Date("January 1, 1971")) {
+			childMales.push(raccoons[i]);
+		}
+	}
+	return childMales;
+}
+
+var getChildFemaleRaccoons = function() {
+	var childFemales = [];
+	for (var i = 0; i < raccoons.length; i ++) {
+		if (raccoons[i].sex === "female" && getAge(raccoons[i]) < new Date("January 1, 1971")) {
+			childFemales.push(raccoons[i]);
+		}
+	}
+	return childFemales;
+}
+
 var getAge = function(raccoon) {
 	return Math.abs(date - raccoon.birthday);
 }

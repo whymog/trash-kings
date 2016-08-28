@@ -31,7 +31,8 @@ var updateStatsPane = function() {
 	$statNumRaccoons.html		( getTotalRaccoons() );
 	$expandedNumRaccoons.html 	( "Adults: " + getAdultRaccoons().length + " (" + 
 								  	getAdultFemaleRaccoons().length + " females, " + getAdultMaleRaccoons().length + " males)<br />" +
-								  "Children: " + getChildRaccoons().length );
+								  "Children: " + getChildRaccoons().length + " (" +
+								  	getChildFemaleRaccoons().length + " females, " + getChildMaleRaccoons().length + " males)<br />" );
 	$statNumHumans.html			( humans );
 	$statSeason.html			( getSeason(date) );
 	$statDate.html				( getHoursMinutesString(date) );
