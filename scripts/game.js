@@ -27,6 +27,8 @@ var prepUI = function() {
 
 	$('input.speedControl').val(minutesPerTick);
 	$('span.speedControl.display').html(minutesPerTick + ' minutes per tick');
+
+	updateAssignmentsPane();
 }
 
 var updateStatsPane = function() {
