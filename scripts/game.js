@@ -22,6 +22,9 @@ var defineUIElements = function () {
 
 var prepUI = function() {
 	$('div.progressBar').hide();
+
+	$('input.speedControl').val(minutesPerTick);
+	$('span.speedControl.display').html(minutesPerTick + ' minutes per tick');
 }
 
 var updateStatsPane = function() {
@@ -123,9 +126,9 @@ $(document).ready(function() {
 	})
 
 	$("input.speedControl").change(function() {
-		minutesPerTick = $(".speedControl").val();
+		minutesPerTick = Number($(".speedControl").val());
 		$("span.speedControl.display").html(minutesPerTick + " minutes per tick");
-	})
+	});
 
 	startGame();
 });

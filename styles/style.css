@@ -92,6 +92,7 @@ body {
 	font-size: 10px;
 	vertical-align: text-bottom;
 	width: 30%;
+	clear: both;
 }
 
 .tooltipOverlay {

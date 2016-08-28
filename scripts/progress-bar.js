@@ -24,6 +24,7 @@ ProgressBar.prototype.addToDOM = function() {
 var updateProgressBars = function() {
 	if (currentlyBreeding) {
 		if (breedTimeElapsed < breedTimeRequired) {
+			console.log(breedTimeElapsed, minutesPerTick);
 			//Update breedTimeElapsed
 			breedTimeElapsed += minutesPerTick;
 			//Update progress bar

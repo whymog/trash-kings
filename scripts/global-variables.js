@@ -1,6 +1,6 @@
 /****** GLOBAL VARIABLES ******/
 var tickRate = 500;
-var minutesPerTick = 30;
+var minutesPerTick = 60;
 
 var humans = 318900000;
 
