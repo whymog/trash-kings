@@ -7,7 +7,7 @@ var getTotalRaccoons = function() {
 var getAdultRaccoons = function() {
 	var adults = [];
 	for (var i = 0; i < raccoons.length; i ++) {
-		if (getAge(raccoons[i]) >= 365) { // One year old
+		if (getAge(raccoons[i]) >= new Date("January 1, 1971")) { // One year old
 			adults.push(raccoons[i]);
 		}
 	}
