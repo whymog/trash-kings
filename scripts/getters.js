@@ -117,6 +117,7 @@ var getAssignments = function(assignment) {
 			}
 			assignments[thisJob] = numWithThisJob;
 		}
+		return assignments;
 	}
 }
 
