@@ -17,7 +17,7 @@ var getAdultRaccoons = function() {
 var getChildRaccoons = function() {
 	var children = [];
 	for (var i = 0; i < raccoons.length; i ++) {
-		if (getAge(raccoons[i]) < 365) {
+		if (getAge(raccoons[i]) < new Date("January 1, 1971")) {
 			children.push(raccoons[i]);
 		}
 	}
@@ -47,7 +47,7 @@ var getFemaleRaccoons = function() {
 var getAdultMaleRaccoons = function() {
 	var adultMales = [];
 	for (var i = 0; i < raccoons.length; i ++) {
-		if (raccoons[i].sex === "male" && getAge(raccoons[i]) >= 365) {
+		if (raccoons[i].sex === "male" && getAge(raccoons[i]) >= new Date("January 1, 1971")) {
 			adultMales.push(raccoons[i]);
 		}
 	}
@@ -57,7 +57,7 @@ var getAdultMaleRaccoons = function() {
 var getAdultFemaleRaccoons = function() {
 	var adultFemales = [];
 	for (var i = 0; i < raccoons.length; i ++) {
-		if (raccoons[i].sex === "female" && getAge(raccoons[i]) >= 365) {
+		if (raccoons[i].sex === "female" && getAge(raccoons[i]) >= new Date("January 1, 1971")) {
 			adultFemales.push(raccoons[i]);
 		}
 	}
@@ -65,7 +65,7 @@ var getAdultFemaleRaccoons = function() {
 }
 
 var getAge = function(raccoon) {
-	return (date - raccoon.birthday);
+	return Math.abs(date - raccoon.birthday);
 }
 
 // Date and Time
