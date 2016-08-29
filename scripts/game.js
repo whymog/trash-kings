@@ -46,6 +46,9 @@ var updateStatsPane = function() {
 
 var updateAssignmentsPane = function() {
 	$('.numUnassigned').html(getAssignments("unassigned").length + " raccoons are unassigned");
+
+	//TODO: Create a method to loop through every span that displyays assignees
+	//and update its value
 }
 
 var updateActionsPane = function() {
@@ -138,6 +141,10 @@ $(document).ready(function() {
 	$("input.speedControl").change(function() {
 		minutesPerTick = Number($(".speedControl").val());
 		$("span.speedControl.display").html(minutesPerTick + " minutes per tick");
+	});
+
+	$("div.assignments button").on("click", function(e) {
+		allocate(e);
 	});
 
 	startGame();
