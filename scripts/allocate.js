@@ -12,6 +12,7 @@ var allocate = function(e) {
 		for (var i = 0; i < raccoons.length; i++) {
 			if (raccoons[i].assignment === assignment) {
 				raccoons[i].assignment = "unassigned";
+				updateAllocationLabels(assignment);
 				return;
 			}
 		}
@@ -25,6 +26,7 @@ var allocate = function(e) {
 		for (var i = 0; i < raccoons.length; i++) {
 			if (raccoons[i].assignment === "unassigned") {
 				raccoons[i].assignment = assignment;
+				updateAllocationLabels(assignment);
 				return;
 			}
 		}
@@ -33,4 +35,14 @@ var allocate = function(e) {
 	console.log(e);
 	console.log(e.target.dataset.assignment);
 	console.log(e.target.classList[0]);
+}
+
+var updateAllocationLabels = function(assignment) {
+	// Finally, update the appropriate label span so we don't have
+	// to check every time tick() fires (that was a bad and
+	// unsustainable method anyway)
+	if (assignment !== "unassigned") {
+		$('span[data-assignment=' + assignment + ']').html(getAssignments(assignment).length);
+	}
+	$('.numUnassigned').html(getAssignments("unassigned").length + " raccoons are unassigned");
 }

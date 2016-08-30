@@ -28,6 +28,8 @@ var prepUI = function() {
 	$('input.speedControl').val(minutesPerTick);
 	$('span.speedControl.display').html(minutesPerTick + ' minutes per tick');
 
+	$('.numUnassigned').html(updateAllocationLabels("unassigned"));
+
 	updateAssignmentsPane();
 }
 
@@ -42,13 +44,6 @@ var updateStatsPane = function() {
 	$statDate.html				( getHoursMinutesString(date) );
 	$statTime.html				( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
 	$statFood.html				( foodStores.toFixed(1) );
-}
-
-var updateAssignmentsPane = function() {
-	$('.numUnassigned').html(getAssignments("unassigned").length + " raccoons are unassigned");
-
-	//TODO: Create a method to loop through every span that displyays assignees
-	//and update its value
 }
 
 var updateActionsPane = function() {
@@ -110,11 +105,16 @@ var checkSeasonChangeEvents = function(season) {
 var tick = function() {
 	// Increment all the things
 	window.setTimeout(function() { 
+		// TODO: This model is inefficient. Each pane should
+		// only be updated when an event fires that changes its
+		// value. Otherwise, this doesn't scale for performance.
+		// See the updateAllocationLabels() method in allocate.js 
+		// for an example.
+
 		updateDate();
 		updateHumanPopulation();
 		updateStores();
 		updateStatsPane();
-		updateAssignmentsPane();
 		updateActionsPane();
 		updateProgressBars();
 
