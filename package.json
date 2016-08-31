@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/whymog/trash-kings/issues"
   },
-  "homepage": "https://github.com/whymog/trash-kings#readme"
+  "homepage": "https://github.com/whymog/trash-kings#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1"
+  }
 }
