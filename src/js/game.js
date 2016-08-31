@@ -29,8 +29,6 @@ var prepUI = function() {
 	$('span.speedControl.display').html(minutesPerTick + ' minutes per tick');
 
 	$('.numUnassigned').html(updateAllocationLabels("unassigned"));
-
-	updateAssignmentsPane();
 }
 
 var updateStatsPane = function() {
