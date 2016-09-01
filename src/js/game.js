@@ -86,7 +86,9 @@ var updateHumanPopulation = function() {
 }
 
 var updateStores = function() {
-	foodStores += 0.001 * minutesPerTick;
+	// Update this so it just gets all assignments and iterates through each to update the correct var
+	var raccoonsGatheringFood = getAssignments('gatherFood');
+	foodStores += 0.001 * minutesPerTick * raccoonsGatheringFood.length;
 }
 
 var checkSeasonChangeEvents = function(season) {

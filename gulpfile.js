@@ -30,6 +30,10 @@ gulp.task('clean', function() {
   	del(['dist', 'src/js/app*.js*']);
 });
 
+gulp.task('watchFiles', function() {
+  gulp.watch('src/js/*.js', ['default']);
+})
+
 gulp.task("build", ['concatScripts'], function() {
   	return gulp.src(["src/styles/style.css", "src/js/app.js", 'src/index.html'], { base: './src/'})
                .pipe(gulp.dest('dist'));
