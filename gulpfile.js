@@ -27,7 +27,7 @@ gulp.task('concatScripts', function() {
 });
 
 gulp.task('clean', function() {
-  	del(['dist', 'src/js/app*.js']);
+  	del(['dist', 'src/js/app*.js*']);
 });
 
 gulp.task("build", ['concatScripts'], function() {
