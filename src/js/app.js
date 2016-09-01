@@ -346,7 +346,8 @@ var sizeOfUnitedStates = 3537436; // square miles
 var raccoonTerritory = 1; // square miles
 var humanTerritory = sizeOfUnitedStates - raccoonTerritory;
 
-var foodStores = 0;
+var foodStores = 0,
+	twigStores = 0;
 
 var humanGrowthRate = 5; // 7,855 net humans gained in the US per day; let's approximate to 5 per minute
 
@@ -568,7 +569,8 @@ var defineUIElements = function () {
 	$statSeason = 			$('.season .stat'),
 	$statDate = 			$('.date .stat'),
 	$statTime = 			$('.time .stat'),
-	$statFood =				$('.food .stat');
+	$statFood =				$('.food .stat'),
+	$statTwigs = 			$('.twigs .stat');
 
 	$assignmentsPane = 		$('.assignments');
 
@@ -596,6 +598,7 @@ var updateStatsPane = function() {
 	$statDate.html				( getHoursMinutesString(date) );
 	$statTime.html				( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
 	$statFood.html				( foodStores.toFixed(1) );
+	$statTwigs.html				( twigStores.toFixed(1) );
 }
 
 var updateActionsPane = function() {
@@ -641,8 +644,28 @@ var updateHumanPopulation = function() {
 
 var updateStores = function() {
 	// Update this so it just gets all assignments and iterates through each to update the correct var
-	var raccoonsGatheringFood = getAssignments('gatherFood');
-	foodStores += 0.001 * minutesPerTick * raccoonsGatheringFood.length;
+	var assigned = getAssignments();
+
+	// Don't do anything if nobody's doin' nothin', you know?
+	if (assigned["unassigned"] === getTotalRaccoons()) return;
+
+	// var assignments = Object.keys(assigned);
+
+	// for (var assignment in assignments) {
+	// 	if (assignment === "gatherFood") {
+	// 		foodStores += 0.001 * minutesPerTick * getAssignments(assignment).length;
+	// 	} else if (assignment === "gatherTwigs") {
+	// 		twigStores += 0.001 * minutesPerTick * getAssignments(assignment).length;
+	// 	}
+	// }
+
+	
+	if (getAssignments('gatherFood').length > 0) {
+		foodStores += 0.001 * minutesPerTick * getAssignments('gatherFood').length;
+	}
+	if (getAssignments('gatherTwigs').length > 0) {
+		twigStores += 0.001 * minutesPerTick * getAssignments('gatherTwigs').length; 
+	}
 }
 
 var checkSeasonChangeEvents = function(season) {
