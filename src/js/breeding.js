@@ -95,13 +95,18 @@ var spawnBabyRaccoons = function() {
 
 			var newRaccoon = {
 				id: newID,
-				name: "Raccoon" + newID,
 				sex: Math.random() > 0.5 ? "female" : "male",
 				birthday: date,
 				pregnant: false,
 				assignment: "unassigned",
 				alive: true
 			};
+
+			// Get the name from the list of possible options
+			newRaccoon.name = assignName(newRaccoon.sex);
+
+			console.log(newRaccoon);
+
 			babies.push(newRaccoon);
 			raccoons.push(newRaccoon);
 			console.log(newRaccoon);

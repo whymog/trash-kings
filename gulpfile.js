@@ -11,12 +11,13 @@ var gulp = require('gulp'),
 gulp.task('concatScripts', function() {
     return gulp.src([
         'src/js/allocate.js',
-        'src/js/breeding.js',
         'src/js/getters.js',
+        'src/js/breeding.js',
         'src/js/global-variables.js',
         'src/js/helpers.js',
         'src/js/messages.js',
         'src/js/progress-bar.js',
+        'src/js/raccoon-names.js',
         'src/js/raccoons.js',
         'src/js/game.js'
         ])

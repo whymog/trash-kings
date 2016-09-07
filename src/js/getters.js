@@ -88,6 +88,17 @@ var getChildFemaleRaccoons = function() {
 	return childFemales;
 }
 
+// Apply Names
+
+var assignName = function(sex) {
+	// Let's randomly assign a gender-neutral name 33% of the time
+	var name = "",
+		genderToUse = Math.random() < 0.33 ? "neutral" : sex;
+	
+	return RaccoonNames[genderToUse][Math.floor(Math.random() * RaccoonNames[genderToUse].length)];
+	// Change above to a return statement once verified to work
+}
+
 // Assignments
 
 var getAssignments = function(assignment) {
