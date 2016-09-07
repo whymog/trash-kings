@@ -27,18 +27,27 @@ gulp.task('concatScripts', function() {
     .pipe(gulp.dest('src/js'));
 });
 
+gulp.task('minifyScripts', ['concatScripts'], function() {
+    return gulp.src('src/js/app.js')
+      .pipe(uglify())
+      .pipe(rename('app.min.js'))
+      .pipe(gulp.dest('src/js'));
+});
+
 gulp.task('clean', function() {
   	del(['dist', 'src/js/app*.js*']);
 });
 
 gulp.task('watchFiles', function() {
-  gulp.watch('src/js/*.js', ['default']);
+  gulp.watch('src/js/*.js', ['minifyScripts']);
 })
 
-gulp.task("build", ['concatScripts'], function() {
-  	return gulp.src(["src/styles/style.css", "src/js/app.js", 'src/index.html'], { base: './src/'})
+gulp.task("build", ['minifyScripts'], function() {
+  	return gulp.src(["src/styles/style.css", "src/js/app.js", "src/js/app.min.js", 'src/index.html'], { base: './src/'})
                .pipe(gulp.dest('dist'));
 });
+
+gulp.task('server', ['watchFiles']);
 
 gulp.task('default', ['clean'], function() {
 	gulp.start('build');

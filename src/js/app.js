@@ -528,14 +528,16 @@ var RaccoonNames = {
 		"Jim-Bob",
 		"Reginald Raccoon-VelJohnson",
 		"Dudeface McBroson",
-		"Steve \"Raccoon\" Buscemi"
+		"Steve \"Raccoon\" Buscemi",
+		"Norbert"
 	],
 	"female": [
 		"Racchel",
 		"Araccoon Martell",
 		"Gladys",
 		"Elizabeth",
-		"Josephine"
+		"Josephine",
+		"Neoprene"
 	],
 	"neutral": [
 		"Raccquetball",
