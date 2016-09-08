@@ -34,15 +34,24 @@ gulp.task('minifyScripts', ['concatScripts'], function() {
       .pipe(gulp.dest('src/js'));
 });
 
+gulp.task('sass', function () {
+  return gulp.src('src/styles/*.scss')
+    .pipe(maps.init())
+    .pipe(sass().on('error', sass.logError))
+    .pipe(maps.write())
+    .pipe(gulp.dest('src/styles'));
+});
+
 gulp.task('clean', function() {
   	del(['dist', 'src/js/app*.js*']);
 });
 
 gulp.task('watchFiles', function() {
   gulp.watch('src/js/*.js', ['minifyScripts']);
+  gulp.watch('src/css/*.scss', ['sass']);
 })
 
-gulp.task("build", ['minifyScripts'], function() {
+gulp.task("build", ['minifyScripts', 'sass'], function() {
   	return gulp.src(["src/styles/style.css", "src/js/app.js", "src/js/app.min.js", 'src/index.html'], { base: './src/'})
                .pipe(gulp.dest('dist'));
 });

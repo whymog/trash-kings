@@ -1,0 +1,100 @@
+body {
+	background-color: white;
+	margin: 4px;
+	font-family: "Courier New", monospace;
+}
+
+#leftPane, #centerPane, #rightPane {
+	margin: 0px;
+	display: inline-block;
+	width: 33%;
+	float: left;
+	/*padding: 4px;*/
+}
+
+.paneInner {
+	padding: 4px;
+}
+
+#leftPane {
+	background-color: #EEEEF4;
+}
+
+#centerPane {
+	background-color: #F4EEEE;
+	width: 34%;
+}
+
+#rightPane {
+	/*float: right;*/
+	background-color: #EEF4EE;
+}
+
+.paneTitle {
+	font-size: 1.2em;
+	font-weight: 700;
+	display: block;
+	margin-bottom: 2px;
+}
+
+.statExpander {
+	font-size: 0.8em;
+	background-color: rgba(50,50,50, .2);
+	cursor: pointer;
+}
+
+.expandedStat {
+	background-color: rgba(50, 50, 50, .2);
+	display: none;
+}
+
+.progressBar {
+	display: inline-block;
+	vertical-align: bottom;
+	width: 300px;
+	height: 20px;
+	background-color: gray;
+	margin: 0;
+	padding: 0;
+	border: 0;
+
+	.fill {
+		float: left;
+		background-color: #33DD77;
+		width: 0px;
+		height: 20px;
+	}
+
+	.text {
+		font-size: 11px;
+		width: inherit;
+		text-align: center;
+		position: absolute;
+		vertical-align: middle;
+	}
+}
+
+/* MESSAGES */
+
+.messageContainer {
+	display: block;
+	margin: 0px;
+}
+
+.messageText {
+	display: inline-block;
+	width: 70%;
+}
+
+.messageTimestamp {
+	float: right;
+	text-align: right;
+	font-size: 10px;
+	vertical-align: text-bottom;
+	width: 30%;
+	clear: both;
+}
+
+.tooltipOverlay {
+	display: none;
+}
