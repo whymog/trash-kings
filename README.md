@@ -3,6 +3,10 @@
 
 Follow development progress on [Trello](https://trello.com/b/maLfJmUF)  
 
+## What is it though  
+
+Have you played Dwarf Fortress? Neither have I. But it's kind of like that, probably.  
+
 ## How to Run  
 
 1. `git clone` the repo or download the .zip version  
