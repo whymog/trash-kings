@@ -537,14 +537,22 @@ var RaccoonNames = {
 		"Gladys",
 		"Elizabeth",
 		"Josephine",
-		"Neoprene"
+		"Neoprene",
+		"Polyethylene"
 	],
 	"neutral": [
 		"Raccquetball",
 		"The shifty-eyed one",
 		"The one who keeps stealing the cat's food",
 		"The Notorious R.A.C.C.O.O.N.",
-		"Rocky"
+		"Rocky",
+		"Trashfiend",
+	],
+	"titles": [
+		"the Enlightened",
+		"the Stinky",
+		"of the Sacred Detritus",
+		"the Discarded"
 	]
 }
 var raccoons = [
