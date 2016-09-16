@@ -4,6 +4,22 @@ body {
 	font-family: "Courier New", monospace;
 }
 
+footer {
+	display: block;
+	clear: both;
+	text-align: center;
+	position: fixed;
+	width: 100%;
+	bottom: 0;
+	a {
+		font-style: italic;
+		vertical-align: sub;
+	}
+	height: 30px;
+	background-color: #AAA;
+	margin-left: -4px;
+}
+
 #leftPane, #centerPane, #rightPane {
 	margin: 0px;
 	display: inline-block;
