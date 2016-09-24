@@ -172,5 +172,7 @@ $(document).ready(function() {
 		allocate(e);
 	});
 
+	// TODO: Add a listener here for the tooltip expander/toggle/whatever it ends up being
+
 	startGame();
 });

@@ -178,7 +178,7 @@ var getRateOfChangeFood = function() {
 
 	if (foodIncreaseRate > foodDecreaseRate) 
 		returnStr += "+";
-	returnStr += (foodIncreaseRate - foodDecreaseRate).toString();
+	returnStr += (foodIncreaseRate - foodDecreaseRate).toFixed(2).toString();
 
 	return returnStr;
 }

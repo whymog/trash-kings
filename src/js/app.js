@@ -18,13 +18,13 @@ var allocate = function(e) {
 		}
 	} else if (action === "incrementAssignees") {
 		// First, check to make sure there's at least one unassigned raccoon
-		if (getAssignments("unassigned").length === 0) {
+		if (getAssignments("unassigned").length <= getChildRaccoons().length) {
 			var errorMsg = new Message( {message: "Unable to allocate - all racccoons are currently assigned" } );
 			return errorMsg;
 		}
 		// Next, find the first unassigned raccoon and assign to this task
 		for (var i = 0; i < raccoons.length; i++) {
-			if (raccoons[i].assignment === "unassigned") {
+			if (raccoons[i].assignment === "unassigned" && getAge(raccoons[i]) > new Date("January 1, 1971")) {
 				raccoons[i].assignment = assignment;
 				updateAllocationLabels(assignment);
 				return;
@@ -226,7 +226,7 @@ var getRateOfChangeFood = function() {
 
 	if (foodIncreaseRate > foodDecreaseRate) 
 		returnStr += "+";
-	returnStr += (foodIncreaseRate - foodDecreaseRate).toString();
+	returnStr += (foodIncreaseRate - foodDecreaseRate).toFixed(2).toString();
 
 	return returnStr;
 }
@@ -791,6 +791,8 @@ $(document).ready(function() {
 	$("div.assignments button").on("click", function(e) {
 		allocate(e);
 	});
+
+	// TODO: Add a listener here for the tooltip expander/toggle/whatever it ends up being
 
 	startGame();
 });
