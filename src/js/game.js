@@ -42,7 +42,7 @@ var updateStatsPane = function() {
 	$statSeason.html			( getSeason(date) );
 	$statDate.html				( getHoursMinutesString(date) );
 	$statTime.html				( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
-	$statFood.html				( foodStores.toFixed(1) );
+	$statFood.html				( foodStores.toFixed(1) + " | " + getRateOfChangeFood() + "/tick");
 	$statTwigs.html				( twigStores.toFixed(1) );
 }
 
@@ -91,8 +91,8 @@ var updateStores = function() {
 	// Update this so it just gets all assignments and iterates through each to update the correct var
 	var assigned = getAssignments();
 
-	// Don't do anything if nobody's doin' nothin', you know?
-	if (assigned["unassigned"] === getTotalRaccoons()) return;
+	// // Don't do anything if nobody's doin' nothin', you know?
+	// if (assigned["unassigned"] === getTotalRaccoons()) return;
 
 	// var assignments = Object.keys(assigned);
 
@@ -111,6 +111,9 @@ var updateStores = function() {
 	if (getAssignments('gatherTwigs').length > 0) {
 		twigStores += 0.001 * minutesPerTick * getAssignments('gatherTwigs').length; 
 	}
+
+	// Subtract food based on how many raccoons are alive
+	foodStores -= 0.0001 * minutesPerTick * getTotalRaccoons();
 }
 
 var checkSeasonChangeEvents = function(season) {

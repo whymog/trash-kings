@@ -2,6 +2,8 @@ var Message = function(object) {
 	this.object = object;
 	this.date = date;
 
+	console.log(this.object);
+
 	if (this.object.message) {
 		var output = "<div class='messageContainer'><span class='messageText'>" + this.object.message + "</span>";
 		output += "<div class='messageTimestamp'>(" + this.date.toDateString() + " " + getHoursMinutesString(this.date) + ")</div><br />";

@@ -169,4 +169,18 @@ var getSeason = function(date) {
 	}
 }
 
+// Resources
+
+var getRateOfChangeFood = function() {
+	var foodIncreaseRate = Number(0.001 * minutesPerTick * getAssignments('gatherFood').length);
+	var foodDecreaseRate = Number(0.0001 * minutesPerTick * getTotalRaccoons());
+	var returnStr = "";
+
+	if (foodIncreaseRate > foodDecreaseRate) 
+		returnStr += "+";
+	returnStr += (foodIncreaseRate - foodDecreaseRate).toString();
+
+	return returnStr;
+}
+
 /**** End getters *****/

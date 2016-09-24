@@ -217,6 +217,20 @@ var getSeason = function(date) {
 	}
 }
 
+// Resources
+
+var getRateOfChangeFood = function() {
+	var foodIncreaseRate = Number(0.001 * minutesPerTick * getAssignments('gatherFood').length);
+	var foodDecreaseRate = Number(0.0001 * minutesPerTick * getTotalRaccoons());
+	var returnStr = "";
+
+	if (foodIncreaseRate > foodDecreaseRate) 
+		returnStr += "+";
+	returnStr += (foodIncreaseRate - foodDecreaseRate).toString();
+
+	return returnStr;
+}
+
 /**** End getters *****/
 /********* Actions **********/
 
@@ -362,7 +376,7 @@ var sizeOfUnitedStates = 3537436; // square miles
 var raccoonTerritory = 1; // square miles
 var humanTerritory = sizeOfUnitedStates - raccoonTerritory;
 
-var foodStores = 0,
+var foodStores = 10,
 	twigStores = 0;
 
 var humanGrowthRate = 5; // 7,855 net humans gained in the US per day; let's approximate to 5 per minute
@@ -449,6 +463,8 @@ function shuffle(array) {
 var Message = function(object) {
 	this.object = object;
 	this.date = date;
+
+	console.log(this.object);
 
 	if (this.object.message) {
 		var output = "<div class='messageContainer'><span class='messageText'>" + this.object.message + "</span>";
@@ -646,7 +662,7 @@ var updateStatsPane = function() {
 	$statSeason.html			( getSeason(date) );
 	$statDate.html				( getHoursMinutesString(date) );
 	$statTime.html				( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
-	$statFood.html				( foodStores.toFixed(1) );
+	$statFood.html				( foodStores.toFixed(1) + " | " + getRateOfChangeFood() + "/tick");
 	$statTwigs.html				( twigStores.toFixed(1) );
 }
 
@@ -695,8 +711,8 @@ var updateStores = function() {
 	// Update this so it just gets all assignments and iterates through each to update the correct var
 	var assigned = getAssignments();
 
-	// Don't do anything if nobody's doin' nothin', you know?
-	if (assigned["unassigned"] === getTotalRaccoons()) return;
+	// // Don't do anything if nobody's doin' nothin', you know?
+	// if (assigned["unassigned"] === getTotalRaccoons()) return;
 
 	// var assignments = Object.keys(assigned);
 
@@ -715,6 +731,9 @@ var updateStores = function() {
 	if (getAssignments('gatherTwigs').length > 0) {
 		twigStores += 0.001 * minutesPerTick * getAssignments('gatherTwigs').length; 
 	}
+
+	// Subtract food based on how many raccoons are alive
+	foodStores -= 0.0001 * minutesPerTick * getTotalRaccoons();
 }
 
 var checkSeasonChangeEvents = function(season) {
