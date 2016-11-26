@@ -185,7 +185,6 @@ var getRateOfChangeFood = function() {
 
 var getRateOfChangeTwigs = function() {
 	var twigsIncreaseRate = Number(twigsGatherRate * minutesPerTick * getAssignments('gatherTwigs').length);
-	console.log("twigsIncreaseRate", twigsIncreaseRate);
 	var returnStr = "";
 
 	if (twigsIncreaseRate > 0)

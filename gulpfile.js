@@ -15,6 +15,7 @@ gulp.task('concatScripts', function() {
         'src/js/breeding.js',
         'src/js/global-variables.js',
         'src/js/helpers.js',
+        'src/js/map.js',
         'src/js/messages.js',
         'src/js/progress-bar.js',
         'src/js/raccoon-names.js',
@@ -47,8 +48,9 @@ gulp.task('clean', function() {
 });
 
 gulp.task('watchFiles', function() {
-  gulp.watch('src/js/*.js', ['minifyScripts']);
-  gulp.watch('src/css/*.scss', ['sass']);
+  gulp.watch('src/js/*.js', ['minifyScripts', 'build']);
+  gulp.watch('src/css/*.scss', ['sass', 'build']);
+  gulp.watch('src/index.html', ['build']);
 })
 
 gulp.task("build", ['minifyScripts', 'sass'], function() {

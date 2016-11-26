@@ -104,7 +104,6 @@ var updateStores = function() {
 	// 	}
 	// }
 
-
 	if (getAssignments('gatherFood').length > 0) {
 		foodStores += foodGatherRate * minutesPerTick * getAssignments('gatherFood').length;
 	}
