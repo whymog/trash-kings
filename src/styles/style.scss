@@ -94,9 +94,24 @@ footer {
 
 .mapDisplay {
 	display: block;
-	background-color: white;
-	width: 90%;
-	height: 90%;
+	width: auto;
+	height: auto;
+	white-space: pre-wrap;
+}
+
+.graphicalMap {
+	margin-left: auto;
+	margin-right: auto;
+	display: table;
+}
+
+.mapRow {
+	height: 32px;
+}
+
+.mapTile {
+	width: 32px;
+	height: 32px;
 }
 
 /* MESSAGES */

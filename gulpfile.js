@@ -49,12 +49,12 @@ gulp.task('clean', function() {
 
 gulp.task('watchFiles', function() {
   gulp.watch('src/js/*.js', ['minifyScripts', 'build']);
-  gulp.watch('src/css/*.scss', ['sass', 'build']);
+  gulp.watch('src/styles/*.scss', ['sass', 'build']);
   gulp.watch('src/index.html', ['build']);
 })
 
 gulp.task("build", ['minifyScripts', 'sass'], function() {
-  	return gulp.src(["src/styles/style.css", "src/js/app.js", "src/js/app.min.js", 'src/index.html'], { base: './src/'})
+  	return gulp.src(["src/styles/style.css", "src/js/app.js", "src/js/app.min.js", 'src/index.html', 'src/img/*.png'], { base: './src/'})
                .pipe(gulp.dest('dist'));
 });
 

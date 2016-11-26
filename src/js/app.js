@@ -476,7 +476,7 @@ function shuffle(array) {
 }
 
 /*** End Sorters and Helpers ****/	
-var WorldMap = function(map) {
+function WorldMap(map) {
   this.legend = [
     { name: 'grass', symbol: 'g' },
     { name: 'trees', symbol: 't' },
@@ -520,26 +520,51 @@ WorldMap.prototype.convertMapToString = function(map) {
   return mapStr;
 }
 
+WorldMap.prototype.convertMapToImages = function(map) {
+  var newMapStr = "<div class='graphicalMap'>";
+
+  for (var i = 0; i < map.length; i ++) {
+    newMapStr += "<div class='mapRow'>";
+
+    for (var j = 0; j < map[i].length; j++) {
+      newMapStr += "<img class='mapTile' src='./img/" + map[i][j] + ".png'>";
+    }
+
+    newMapStr += "</div>";
+  }
+
+  newMapStr += "</div>";
+
+  return newMapStr;
+}
+
 var testMapArray =
 [
   ['t', 't', 'g', 'g', 'g', 'g', 'g', 'r', 't', 't'],
   ['t', 't', 'g', 'g', 'g', 'g', 'g', 'r', 'H', 't'],
   ['t', 't', 't', 'g', 'g', 'g', 'g', 'r', 'H', 'g'],
   ['t', 'g', 't', 'g', 'g', 'g', 'g', 'r', 'H', 'g'],
-  ['g', 'g', 'g', 'g', 'g', 'g', 'g', 'r', 'g', 'g'],
+  ['g', 'g', 'g', 'g', 't', 't', 'g', 'r', 'g', 'g'],
   ['g', 'Bm', 'Bm', 'g', 'g', 'g', 'g', 'r', 'g', 'g'],
   ['g', 'Bm', 'Bm', 'g', 'g', 'g', 'g', 'r', 'g', 'g'],
-  ['g', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r'],
-  ['g', 'r', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'],
-  ['g', 'r', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g'],
+  ['t', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r', 'r'],
+  ['t', 'r', 't', 't', 'g', 'H', 'g', 'H', 'g', 'g'],
+  ['g', 'r', 'g', 't', 't', 'g', 'g', 'g', 'g', 'g'],
 ];
 
-var testMap = new Map(testMapArray);
+var testMap = new WorldMap(testMapArray);
 console.log(testMap);
 console.log('ASDF');
 
 console.log(testMap);
-// console.log(testMap.convertMapToString(testMapArray));
+console.log(testMap.convertMapToString(testMapArray));
+
+var mapDisplayElement = $('.mapDisplay');
+var mapAsString = testMap.convertMapToString(testMapArray);
+
+console.log(mapAsString);
+
+var mapAsImages = testMap.convertMapToImages(testMapArray);
 
 var Message = function(object) {
 	this.object = object;
@@ -871,6 +896,8 @@ $(document).ready(function() {
 	$("div.assignments button").on("click", function(e) {
 		allocate(e);
 	});
+
+	$(".mapDisplay").html(mapAsImages);
 
 	// TODO: Add a listener here for the tooltip expander/toggle/whatever it ends up being
 

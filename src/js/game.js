@@ -171,6 +171,8 @@ $(document).ready(function() {
 		allocate(e);
 	});
 
+	$(".mapDisplay").html(mapAsImages);
+
 	// TODO: Add a listener here for the tooltip expander/toggle/whatever it ends up being
 
 	startGame();
