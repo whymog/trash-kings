@@ -94,7 +94,7 @@ var assignName = function(sex) {
 	// Let's randomly assign a gender-neutral name 33% of the time
 	var name = "",
 		genderToUse = Math.random() < 0.33 ? "neutral" : sex;
-	
+
 	return RaccoonNames[genderToUse][Math.floor(Math.random() * RaccoonNames[genderToUse].length)];
 	// Change above to a return statement once verified to work
 }
@@ -102,7 +102,7 @@ var assignName = function(sex) {
 // Assignments
 
 var getAssignments = function(assignment) {
-	// If no assignment is specified, return an object containing all assignments and 
+	// If no assignment is specified, return an object containing all assignments and
 	// the number of raccoons assigned to each.
 	// If an assignment _is_ specified, just return the raccoons with that assignment
 	if (assignment) {
@@ -172,13 +172,25 @@ var getSeason = function(date) {
 // Resources
 
 var getRateOfChangeFood = function() {
-	var foodIncreaseRate = Number(0.001 * minutesPerTick * getAssignments('gatherFood').length);
-	var foodDecreaseRate = Number(0.0001 * minutesPerTick * getTotalRaccoons());
+	var foodIncreaseRate = Number(foodGatherRate * minutesPerTick * getAssignments('gatherFood').length);
+	var foodDecreaseRate = Number((foodGatherRate / 10) * minutesPerTick * getTotalRaccoons());
 	var returnStr = "";
 
-	if (foodIncreaseRate > foodDecreaseRate) 
+	if (foodIncreaseRate > foodDecreaseRate)
 		returnStr += "+";
 	returnStr += (foodIncreaseRate - foodDecreaseRate).toFixed(2).toString();
+
+	return returnStr;
+}
+
+var getRateOfChangeTwigs = function() {
+	var twigsIncreaseRate = Number(twigsGatherRate * minutesPerTick * getAssignments('gatherTwigs').length);
+	console.log("twigsIncreaseRate", twigsIncreaseRate);
+	var returnStr = "";
+
+	if (twigsIncreaseRate > 0)
+		returnStr += "+"
+	returnStr += twigsIncreaseRate.toFixed(2).toString();
 
 	return returnStr;
 }

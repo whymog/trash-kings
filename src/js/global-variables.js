@@ -11,6 +11,9 @@ var humanTerritory = sizeOfUnitedStates - raccoonTerritory;
 var foodStores = 10,
 	twigStores = 0;
 
+var foodGatherRate = 0.001,
+		twigsGatherRate = 0.001;
+
 var humanGrowthRate = 5; // 7,855 net humans gained in the US per day; let's approximate to 5 per minute
 
 var startingDate = new Date("December 20, 2017 6:00:00"),

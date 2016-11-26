@@ -34,7 +34,7 @@ var prepUI = function() {
 
 var updateStatsPane = function() {
 	$statNumRaccoons.html		( getTotalRaccoons() );
-	$expandedNumRaccoons.html 	( "Adults: " + getAdultRaccoons().length + " (" + 
+	$expandedNumRaccoons.html 	( "Adults: " + getAdultRaccoons().length + " (" +
 								  	getAdultFemaleRaccoons().length + " females, " + getAdultMaleRaccoons().length + " males)<br />" +
 								  "Children: " + getChildRaccoons().length + " (" +
 								  	getChildFemaleRaccoons().length + " females, " + getChildMaleRaccoons().length + " males)<br />" );
@@ -43,19 +43,19 @@ var updateStatsPane = function() {
 	$statDate.html				( getHoursMinutesString(date) );
 	$statTime.html				( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
 	$statFood.html				( foodStores.toFixed(1) + " | " + getRateOfChangeFood() + "/tick");
-	$statTwigs.html				( twigStores.toFixed(1) );
+	$statTwigs.html				( twigStores.toFixed(1) + " | " + getRateOfChangeTwigs() + "/tick");
 }
 
 var updateActionsPane = function() {
 	/*
 
 	1. Check if breeding is possible
-	
+
 	FORMULA:
 	- Season must be WINTER
 	- Food stores must be >= raccoons * 2
 	- Must not have bred this season
-	
+
 	*/
 
 	if (currentSeason === "Winter" && !bredThisYear) {
@@ -104,12 +104,12 @@ var updateStores = function() {
 	// 	}
 	// }
 
-	
+
 	if (getAssignments('gatherFood').length > 0) {
-		foodStores += 0.001 * minutesPerTick * getAssignments('gatherFood').length;
+		foodStores += foodGatherRate * minutesPerTick * getAssignments('gatherFood').length;
 	}
 	if (getAssignments('gatherTwigs').length > 0) {
-		twigStores += 0.001 * minutesPerTick * getAssignments('gatherTwigs').length; 
+		twigStores += twigsGatherRate * minutesPerTick * getAssignments('gatherTwigs').length;
 	}
 
 	// Subtract food based on how many raccoons are alive
@@ -129,11 +129,11 @@ var checkSeasonChangeEvents = function(season) {
 
 var tick = function() {
 	// Increment all the things
-	window.setTimeout(function() { 
+	window.setTimeout(function() {
 		// TODO: This model is inefficient. Each pane should
 		// only be updated when an event fires that changes its
 		// value. Otherwise, this doesn't scale for performance.
-		// See the updateAllocationLabels() method in allocate.js 
+		// See the updateAllocationLabels() method in allocate.js
 		// for an example.
 
 		updateDate();
@@ -143,7 +143,7 @@ var tick = function() {
 		updateActionsPane();
 		updateProgressBars();
 
-		tick(); 
+		tick();
 	}, tickRate);
 }
 

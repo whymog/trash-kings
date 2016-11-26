@@ -142,7 +142,7 @@ var assignName = function(sex) {
 	// Let's randomly assign a gender-neutral name 33% of the time
 	var name = "",
 		genderToUse = Math.random() < 0.33 ? "neutral" : sex;
-	
+
 	return RaccoonNames[genderToUse][Math.floor(Math.random() * RaccoonNames[genderToUse].length)];
 	// Change above to a return statement once verified to work
 }
@@ -150,7 +150,7 @@ var assignName = function(sex) {
 // Assignments
 
 var getAssignments = function(assignment) {
-	// If no assignment is specified, return an object containing all assignments and 
+	// If no assignment is specified, return an object containing all assignments and
 	// the number of raccoons assigned to each.
 	// If an assignment _is_ specified, just return the raccoons with that assignment
 	if (assignment) {
@@ -220,18 +220,31 @@ var getSeason = function(date) {
 // Resources
 
 var getRateOfChangeFood = function() {
-	var foodIncreaseRate = Number(0.001 * minutesPerTick * getAssignments('gatherFood').length);
-	var foodDecreaseRate = Number(0.0001 * minutesPerTick * getTotalRaccoons());
+	var foodIncreaseRate = Number(foodGatherRate * minutesPerTick * getAssignments('gatherFood').length);
+	var foodDecreaseRate = Number((foodGatherRate / 10) * minutesPerTick * getTotalRaccoons());
 	var returnStr = "";
 
-	if (foodIncreaseRate > foodDecreaseRate) 
+	if (foodIncreaseRate > foodDecreaseRate)
 		returnStr += "+";
 	returnStr += (foodIncreaseRate - foodDecreaseRate).toFixed(2).toString();
 
 	return returnStr;
 }
 
+var getRateOfChangeTwigs = function() {
+	var twigsIncreaseRate = Number(twigsGatherRate * minutesPerTick * getAssignments('gatherTwigs').length);
+	console.log("twigsIncreaseRate", twigsIncreaseRate);
+	var returnStr = "";
+
+	if (twigsIncreaseRate > 0)
+		returnStr += "+"
+	returnStr += twigsIncreaseRate.toFixed(2).toString();
+
+	return returnStr;
+}
+
 /**** End getters *****/
+
 /********* Actions **********/
 
 var breedRaccoons = function() {
@@ -379,6 +392,9 @@ var humanTerritory = sizeOfUnitedStates - raccoonTerritory;
 var foodStores = 10,
 	twigStores = 0;
 
+var foodGatherRate = 0.001,
+		twigsGatherRate = 0.001;
+
 var humanGrowthRate = 5; // 7,855 net humans gained in the US per day; let's approximate to 5 per minute
 
 var startingDate = new Date("December 20, 2017 6:00:00"),
@@ -400,6 +416,7 @@ var $statsPane,
 	$actionsPane;
 
 /**** END GLOBAL VARIABLES ****/
+
 /**** Sorters and Helpers ****/
 
 var monthNames = [
@@ -654,7 +671,7 @@ var prepUI = function() {
 
 var updateStatsPane = function() {
 	$statNumRaccoons.html		( getTotalRaccoons() );
-	$expandedNumRaccoons.html 	( "Adults: " + getAdultRaccoons().length + " (" + 
+	$expandedNumRaccoons.html 	( "Adults: " + getAdultRaccoons().length + " (" +
 								  	getAdultFemaleRaccoons().length + " females, " + getAdultMaleRaccoons().length + " males)<br />" +
 								  "Children: " + getChildRaccoons().length + " (" +
 								  	getChildFemaleRaccoons().length + " females, " + getChildMaleRaccoons().length + " males)<br />" );
@@ -663,19 +680,19 @@ var updateStatsPane = function() {
 	$statDate.html				( getHoursMinutesString(date) );
 	$statTime.html				( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
 	$statFood.html				( foodStores.toFixed(1) + " | " + getRateOfChangeFood() + "/tick");
-	$statTwigs.html				( twigStores.toFixed(1) );
+	$statTwigs.html				( twigStores.toFixed(1) + " | " + getRateOfChangeTwigs() + "/tick");
 }
 
 var updateActionsPane = function() {
 	/*
 
 	1. Check if breeding is possible
-	
+
 	FORMULA:
 	- Season must be WINTER
 	- Food stores must be >= raccoons * 2
 	- Must not have bred this season
-	
+
 	*/
 
 	if (currentSeason === "Winter" && !bredThisYear) {
@@ -724,12 +741,12 @@ var updateStores = function() {
 	// 	}
 	// }
 
-	
+
 	if (getAssignments('gatherFood').length > 0) {
-		foodStores += 0.001 * minutesPerTick * getAssignments('gatherFood').length;
+		foodStores += foodGatherRate * minutesPerTick * getAssignments('gatherFood').length;
 	}
 	if (getAssignments('gatherTwigs').length > 0) {
-		twigStores += 0.001 * minutesPerTick * getAssignments('gatherTwigs').length; 
+		twigStores += twigsGatherRate * minutesPerTick * getAssignments('gatherTwigs').length;
 	}
 
 	// Subtract food based on how many raccoons are alive
@@ -749,11 +766,11 @@ var checkSeasonChangeEvents = function(season) {
 
 var tick = function() {
 	// Increment all the things
-	window.setTimeout(function() { 
+	window.setTimeout(function() {
 		// TODO: This model is inefficient. Each pane should
 		// only be updated when an event fires that changes its
 		// value. Otherwise, this doesn't scale for performance.
-		// See the updateAllocationLabels() method in allocate.js 
+		// See the updateAllocationLabels() method in allocate.js
 		// for an example.
 
 		updateDate();
@@ -763,7 +780,7 @@ var tick = function() {
 		updateActionsPane();
 		updateProgressBars();
 
-		tick(); 
+		tick();
 	}, tickRate);
 }
 
@@ -796,4 +813,5 @@ $(document).ready(function() {
 
 	startGame();
 });
+
 //# sourceMappingURL=app.js.map
