@@ -40,8 +40,8 @@ var updateStatsPane = function() {
 								  	getChildFemaleRaccoons().length + " females, " + getChildMaleRaccoons().length + " males)<br />" );
 	$statNumHumans.html			( humans );
 	$statSeason.html			( getSeason(date) );
-	$statDate.html				( getHoursMinutesString(date) );
-	$statTime.html				( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
+	$statDate.html				( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
+	$statTime.html				( getHoursMinutesString(date) );
 	$statFood.html				( foodStores.toFixed(1) + " | " + getRateOfChangeFood() + "/tick");
 	$statTwigs.html				( twigStores.toFixed(1) + " | " + getRateOfChangeTwigs() + "/tick");
 }

@@ -155,12 +155,15 @@ const getChildFemaleRaccoons = function() {
 }
 
 // Assignments
-const getAssignments = assignment {
-	// If no assignment is specified, return an object containing all assignments
-	// and the number of raccoons assigned to each.
-	// If an assignment _is_ specified, just return the raccoons with that
-	// assignment.
 
+/**
+ * If no assignment is specified, return an object containing all assignments
+ * and the number of raccoons assigned to each.
+ * If an assignment _is_ specified, just return the raccoons with that
+ * assignment.
+ * @param {string} assignment - the name of the job assignment
+ */
+const getAssignments = assignment => {
 	if (assignment) {
 		const assignedRaccoons = [];
 
@@ -179,36 +182,36 @@ const getAssignments = assignment {
 		// variables associated with them at some point. Defining them here is
 		// pretty bad tbh
 
-		const jobs = ["unassigned", "gatherTwigs", "gatherFood"];
-		var assignments = {};
-		for (var i = 0; i < jobs.length; i++) {
-			var thisJob = jobs[i],
-				numWithThisJob = 0;
-			for (var j = 0; j < raccoons.length; j++) {
-				if(raccoons[j].assignment === jobs[i]) {
-					numWithThisJob ++;
+		const jobs = [ "unassigned", "gatherTwigs", "gatherFood" ];
+		const assignments = {};
+
+		jobs.map(job => assignments[job] = []);
+
+		jobs.forEach(job => {
+			raccoons.forEach(raccoon => {
+				if (raccoon.assignment === job) {
+					assignments[job].push(raccoon);
 				}
-			}
-			assignments[thisJob] = numWithThisJob;
-		}
+			});
+		});
+
 		return assignments;
 	}
 }
 
 // Date and Time
 
-var getHoursMinutesString = function(date) {
-	var hmString = date.getHours() + ":";
-	hmString += (date.getMinutes() < 10 ? "0" : "") + date.getMinutes() + " ";
-	hmString += date.getHours() < 12 ? "a.m." : "p.m."
-	return hmString;
+const getHoursMinutesString = date => {
+	const hours = date.getHours();
+	const minutes = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+	const amOrPm = date.getHours() < 12 ? "a.m." : "p.m.";
+
+	return String(`${hours}:${minutes} ${amOrPm}`);
 }
 
-var getMonthName = function(month) {
-	return monthNames[month];
-}
+const getMonthName = month => monthNames[month];
 
-var getSeason = function(date) {
+const getSeason = date => {
 	if (
 		(date.getMonth() === 11 && date.getDate() >= 21) ||
 		(date.getMonth() < 2) ||
@@ -234,27 +237,20 @@ var getSeason = function(date) {
 
 // Resources
 
-var getRateOfChangeFood = function() {
-	var foodIncreaseRate = Number(foodGatherRate * minutesPerTick * getAssignments('gatherFood').length);
-	var foodDecreaseRate = Number((foodGatherRate / 10) * minutesPerTick * getTotalRaccoons());
-	var returnStr = "";
+// TODO: Refactor each of these into a single generic getter that takes a
+// resource as a parameter
 
-	if (foodIncreaseRate > foodDecreaseRate)
-		returnStr += "+";
-	returnStr += (foodIncreaseRate - foodDecreaseRate).toFixed(2).toString();
+const getRateOfChangeFood = () => {
+	const foodIncreaseRate = Number(foodGatherRate * minutesPerTick * getAssignments('gatherFood').length);
+	const foodDecreaseRate = Number((foodGatherRate / 10) * minutesPerTick * getTotalRaccoons());
+	const hasDeficit = foodIncreaseRate < foodDecreaseRate ? true : false;
 
-	return returnStr;
+	return `${hasDeficit ? "" : "+"}${(foodIncreaseRate - foodDecreaseRate).toFixed(2)}`
 }
 
-var getRateOfChangeTwigs = function() {
-	var twigsIncreaseRate = Number(twigsGatherRate * minutesPerTick * getAssignments('gatherTwigs').length);
-	var returnStr = "";
-
-	if (twigsIncreaseRate > 0)
-		returnStr += "+"
-	returnStr += twigsIncreaseRate.toFixed(2).toString();
-
-	return returnStr;
+const getRateOfChangeTwigs = () => {
+	const twigsIncreaseRate = Number(twigsGatherRate * minutesPerTick * getAssignments('gatherTwigs').length);
+	return `${twigsIncreaseRate > 0 ? "+" : ""}${twigsIncreaseRate.toFixed(2)}`;
 }
 
 /**** End getters *****/
@@ -797,8 +793,8 @@ var updateStatsPane = function() {
 								  	getChildFemaleRaccoons().length + " females, " + getChildMaleRaccoons().length + " males)<br />" );
 	$statNumHumans.html			( humans );
 	$statSeason.html			( getSeason(date) );
-	$statDate.html				( getHoursMinutesString(date) );
-	$statTime.html				( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
+	$statDate.html				( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
+	$statTime.html				( getHoursMinutesString(date) );
 	$statFood.html				( foodStores.toFixed(1) + " | " + getRateOfChangeFood() + "/tick");
 	$statTwigs.html				( twigStores.toFixed(1) + " | " + getRateOfChangeTwigs() + "/tick");
 }
