@@ -1,21 +1,25 @@
 /**** Sorters and Helpers ****/
 
+const getRandomFromArray = array => {
+	return array[Math.floor(Math.random() * array.length)];
+}
+
 var monthNames = [
 	"January",
-	"February", 
+	"February",
 	"March",
 	"April",
 	"May",
-	"June", 	
-	"July",	
+	"June",
+	"July",
 	"August",
 	"September",
 	"October",
-	"November", 
-	"December" 
+	"November",
+	"December"
 ];
 
-var seasons = { 
+var seasons = {
 	winter: {
 		name: "Winter",
 		start: new Date("December 21"),
@@ -57,4 +61,4 @@ function shuffle(array) {
 	return array;
 }
 
-/*** End Sorters and Helpers ****/	
+/*** End Sorters and Helpers ****/

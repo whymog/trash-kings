@@ -46,125 +46,140 @@ var updateAllocationLabels = function(assignment) {
 	}
 	$('.numUnassigned').html(getAssignments("unassigned").length + " raccoons are unassigned");
 }
+"use strict";
+
 /**** Math getters ****/
 
-var getAge = function(raccoon) {
-	return Math.abs(date - raccoon.birthday);
-}
+const getAge = raccoon => Math.abs(date - raccoon.birthday);
 
-var getTotalRaccoons = function() {
-	return raccoons.length;
-}
+const isAdult = raccoon => getAge(raccoon) >= new Date("January 1, 1971") ?
+	true :
+	false;
 
-var getAdultRaccoons = function() {
-	var adults = [];
-	for (var i = 0; i < raccoons.length; i ++) {
-		if (getAge(raccoons[i]) >= new Date("January 1, 1971")) { // One year old
-			adults.push(raccoons[i]);
+const getTotalRaccoons = () => raccoons.length;
+
+const getAdultRaccoons = () => {
+	const adults = [];
+
+	raccoons.forEach(raccoon => {
+		if (isAdult(raccoon)) { // One year old
+			adults.push(raccoon);
 		}
-	}
+	});
+
 	return adults;
 }
 
-var getChildRaccoons = function() {
-	var children = [];
-	for (var i = 0; i < raccoons.length; i ++) {
-		if (getAge(raccoons[i]) < new Date("January 1, 1971")) {
-			children.push(raccoons[i]);
+const getChildRaccoons = () => {
+	const children = [];
+
+	raccoons.forEach(raccoon => {
+		if (!isAdult(raccoon)) {
+			children.push(raccoon);
 		}
-	}
+	});
+
 	return children;
 }
 
-var getMaleRaccoons = function() {
-	var males = [];
-	for (var i = 0; i < raccoons.length; i ++) {
-		if (raccoons[i].sex === "male") {
-			males.push(raccoons[i]);
+const getMaleRaccoons = () => {
+	const males = [];
+
+	raccoons.forEach(raccoon => {
+		if (raccoon.sex === "male") {
+			males.push(raccoon);
 		}
-	}
+	});
+
 	return males;
 }
 
-var getFemaleRaccoons = function() {
-	var females = [];
-	for (var i = 0; i < raccoons.length; i ++) {
-		if (raccoons[i].sex === "female") {
-			females.push(raccoons[i]);
+const getFemaleRaccoons = () => {
+	const females = [];
+
+	raccoons.forEach(raccoon => {
+		if (raccoon.sex === "female") {
+			females.push(raccoon);
 		}
-	}
+	});
+
 	return females;
 }
 
-var getAdultMaleRaccoons = function() {
-	var adultMales = [];
-	for (var i = 0; i < raccoons.length; i ++) {
-		if (raccoons[i].sex === "male" && getAge(raccoons[i]) >= new Date("January 1, 1971")) {
-			adultMales.push(raccoons[i]);
+const getAdultMaleRaccoons = () => {
+	const adultMales = [];
+
+	raccoons.forEach(raccoon => {
+		if (raccoon.sex === "male" && isAdult(raccoon)) {
+			adultMales.push(raccoon);
 		}
-	}
+	});
+
 	return adultMales;
 }
 
-var getAdultFemaleRaccoons = function() {
-	var adultFemales = [];
-	for (var i = 0; i < raccoons.length; i ++) {
-		if (raccoons[i].sex === "female" && getAge(raccoons[i]) >= new Date("January 1, 1971")) {
-			adultFemales.push(raccoons[i]);
+const getAdultFemaleRaccoons = function() {
+	const adultFemales = [];
+
+	raccoons.forEach(raccoon => {
+		if (raccoon.sex === "female" && isAdult(raccoon)) {
+			adultFemales.push(raccoon);
 		}
-	}
+	});
+
 	return adultFemales;
 }
 
-var getChildMaleRaccoons = function() {
+const getChildMaleRaccoons = () => {
 	var childMales = [];
-	for (var i = 0; i < raccoons.length; i ++) {
-		if (raccoons[i].sex === "male" && getAge(raccoons[i]) < new Date("January 1, 1971")) {
-			childMales.push(raccoons[i]);
+
+	raccoons.forEach(raccoon => {
+		if (raccoon.sex === "male" && !isAdult(raccoon)) {
+			childMales.push(raccoon);
 		}
-	}
+	});
+
 	return childMales;
 }
 
-var getChildFemaleRaccoons = function() {
+const getChildFemaleRaccoons = function() {
 	var childFemales = [];
-	for (var i = 0; i < raccoons.length; i ++) {
-		if (raccoons[i].sex === "female" && getAge(raccoons[i]) < new Date("January 1, 1971")) {
-			childFemales.push(raccoons[i]);
+
+	raccoons.forEach(raccoon => {
+		if (raccoon.sex === "female" && !isAdult(raccoon)) {
+			childFemales.push(raccoon);
 		}
-	}
+	});
+
 	return childFemales;
 }
 
-// Apply Names
-
-var assignName = function(sex) {
-	// Let's randomly assign a gender-neutral name 33% of the time
-	var name = "",
-		genderToUse = Math.random() < 0.33 ? "neutral" : sex;
-
-	return RaccoonNames[genderToUse][Math.floor(Math.random() * RaccoonNames[genderToUse].length)];
-	// Change above to a return statement once verified to work
-}
-
 // Assignments
+const getAssignments = assignment {
+	// If no assignment is specified, return an object containing all assignments
+	// and the number of raccoons assigned to each.
+	// If an assignment _is_ specified, just return the raccoons with that
+	// assignment.
 
-var getAssignments = function(assignment) {
-	// If no assignment is specified, return an object containing all assignments and
-	// the number of raccoons assigned to each.
-	// If an assignment _is_ specified, just return the raccoons with that assignment
 	if (assignment) {
-		var assignedRaccoons = [];
-		for (var i = 0; i < raccoons.length; i ++) {
-			if (raccoons[i].assignment === assignment) {
-				assignedRaccoons.push(raccoons[i]);
+		const assignedRaccoons = [];
+
+		raccoons.forEach(raccoon => {
+			if (raccoon.assignment === assignment) {
+				assignedRaccoons.push(raccoon);
 			}
-		}
+		});
+
 		return assignedRaccoons;
 	}
-	// Else if no assignment is specified...
+
+	// Or if no assignment is specified...
 	else {
-		var jobs = ["unassigned", "gatherTwigs", "gatherFood"];
+		// TODO: Move jobs out into its own class, because jobs will probably have
+		// variables associated with them at some point. Defining them here is
+		// pretty bad tbh
+
+		const jobs = ["unassigned", "gatherTwigs", "gatherFood"];
 		var assignments = {};
 		for (var i = 0; i < jobs.length; i++) {
 			var thisJob = jobs[i],
@@ -418,22 +433,26 @@ var $statsPane,
 
 /**** Sorters and Helpers ****/
 
+const getRandomFromArray = array => {
+	return array[Math.floor(Math.random() * array.length)];
+}
+
 var monthNames = [
 	"January",
-	"February", 
+	"February",
 	"March",
 	"April",
 	"May",
-	"June", 	
-	"July",	
+	"June",
+	"July",
 	"August",
 	"September",
 	"October",
-	"November", 
-	"December" 
+	"November",
+	"December"
 ];
 
-var seasons = { 
+var seasons = {
 	winter: {
 		name: "Winter",
 		start: new Date("December 21"),
@@ -475,7 +494,8 @@ function shuffle(array) {
 	return array;
 }
 
-/*** End Sorters and Helpers ****/	
+/*** End Sorters and Helpers ****/
+
 function WorldMap(map) {
   this.legend = [
     { name: 'grass', symbol: 'g' },
@@ -644,7 +664,17 @@ var updateProgressBars = function() {
 }
 
 /***** End Progress Bar *****/
-var RaccoonNames = {
+// Apply Names
+
+const assignName = raccoon => {
+	// Let's randomly assign a gender-neutral name 33% of the time
+	const nameGender = Math.random() < 0.33 ? "neutral" : raccoon.sex;
+	raccoon.name = getRandomFromArray(RaccoonNames[nameGender]);
+
+	return raccoon;
+}
+
+const RaccoonNames = {
 	"male": [
 		"Bilbo",
 		"Jim-Bob",
@@ -676,7 +706,8 @@ var RaccoonNames = {
 		"of the Sacred Detritus",
 		"the Discarded"
 	]
-}
+};
+
 var raccoons = [
 	{
 		id: 0,

@@ -1,4 +1,14 @@
-var RaccoonNames = {
+// Apply Names
+
+const assignName = raccoon => {
+	// Let's randomly assign a gender-neutral name 33% of the time
+	const nameGender = Math.random() < 0.33 ? "neutral" : raccoon.sex;
+	raccoon.name = getRandomFromArray(RaccoonNames[nameGender]);
+
+	return raccoon;
+}
+
+const RaccoonNames = {
 	"male": [
 		"Bilbo",
 		"Jim-Bob",
@@ -30,4 +40,4 @@ var RaccoonNames = {
 		"of the Sacred Detritus",
 		"the Discarded"
 	]
-}
+};
