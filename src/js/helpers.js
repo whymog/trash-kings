@@ -4,6 +4,18 @@ const getRandomFromArray = array => {
 	return array[Math.floor(Math.random() * array.length)];
 }
 
+const getSmallest = (...items) => {
+	let smallest = undefined;
+	
+	items.forEach(item => {
+		if (!smallest || item < smallest) {
+			smallest = item;
+		}
+	})
+
+	return smallest;
+};
+
 const monthNames = [
 	"January",
 	"February",
