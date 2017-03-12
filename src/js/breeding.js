@@ -52,8 +52,9 @@ const breedRaccoons = () => {
 	currentlyBreeding = true;
 
 	// 3. Instantiate a breeding countdown bar (~62 days for simplicity's sake)'
-	var breedBar = new ProgressBar("breedBar", 89280);
-	var breedMsg = new Message({ message: "Raccoons have bred. Now...we wait." });
+	let breedBar = new ProgressBar("breedBar", 89280);
+	let breedMsg = new Message({ message: "Raccoons have bred. Now...we wait." });
+
 	breedBar.addToDOM();
 }
 
