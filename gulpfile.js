@@ -24,15 +24,15 @@ gulp.task('concatScripts', function() {
    	.pipe(maps.init())
     .pipe(concat('app.js'))
     .pipe(maps.write('./'))
-    .pipe(gulp.dest('src/js'));
+    .pipe(gulp.dest('./dist/js'));
 });
 
 gulp.task('sass', function () {
-  return gulp.src('src/styles/*.scss')
+  return gulp.src('./src/styles/*.scss')
     .pipe(maps.init())
     .pipe(sass().on('error', sass.logError))
     .pipe(maps.write())
-    .pipe(gulp.dest('src/styles'));
+    .pipe(gulp.dest('./dist/styles'));
 });
 
 gulp.task('clean', function() {
@@ -45,13 +45,13 @@ gulp.task('watchFiles', function() {
   gulp.watch('src/index.html', ['build']);
 })
 
-gulp.task("build", ['sass'], function() {
-  	return gulp.src(["src/styles/style.css", "src/js/app.js", "src/js/app.min.js", 'src/index.html', 'src/img/*.png'], { base: './src/'})
+gulp.task("build", ['concatScripts', 'sass'], function() {
+  	return gulp.src([ 'src/index.html',
+                      'src/img/*.png' ],
+                      { base: './src/'} )
                .pipe(gulp.dest('dist'));
 });
 
 gulp.task('server', ['watchFiles']);
 
-gulp.task('default', ['clean'], function() {
-	gulp.start('build');
-})
+gulp.task('default', ['clean'], () => gulp.start('build'));
