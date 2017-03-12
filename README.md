@@ -7,14 +7,9 @@ Follow development progress on [Trello](https://trello.com/b/maLfJmUF)
 
 Have you played Dwarf Fortress? Neither have I. But it's kind of like that, probably.  
 
-## How to Run  
+## Installation  
 
 1. `git clone` the repo or download the .zip version  
-2. Navigate to `dist/` and open `index.html` in your preferred web browser  
-
-## Developer Installation  
-
-1. `git clone` the repo 
-2. Run `npm install` in the root directory 
-3. To build the static site, run `gulp build`  
-4. Review other tasks in `gulpfile.js`  
+2. Run `npm install` to install all dependencies
+3. Run `gulp build` to build the app
+4. Navigate to `dist/` and open `index.html` in your preferred web browser  
