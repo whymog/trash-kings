@@ -17,7 +17,7 @@ var breedRaccoons = function() {
 	// 	2.a. Get the lower result of getAdultMales().length and getAdultFemaleRaccoons().length; this is the number of breeding pairs
 	var females = getAdultFemaleRaccoons();
 	var males = getAdultMaleRaccoons();
-	var numberOfBreedingPairs = getAdultFemaleRaccoons().length > getAdultMaleRaccoons().length ? 
+	var numberOfBreedingPairs = getAdultFemaleRaccoons().length > getAdultMaleRaccoons().length ?
 		getAdultMaleRaccoons().length : getAdultFemaleRaccoons().length;
 
 	console.log("Breeding pairs:", numberOfBreedingPairs, "Males:", getAdultMaleRaccoons().length, "Females:", getAdultFemaleRaccoons().length);
@@ -103,7 +103,7 @@ var spawnBabyRaccoons = function() {
 			};
 
 			// Get the name from the list of possible options
-			newRaccoon.name = assignName(newRaccoon.sex);
+			assignName(newRaccoon);
 
 			console.log(newRaccoon);
 

@@ -60,7 +60,7 @@ const shuffle = array => {
     array[m] = array[i];
     array[i] = t;
 	}
-	
+
 	return array;
 }
 
