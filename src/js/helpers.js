@@ -4,7 +4,7 @@ const getRandomFromArray = array => {
 	return array[Math.floor(Math.random() * array.length)];
 }
 
-var monthNames = [
+const monthNames = [
 	"January",
 	"February",
 	"March",
@@ -19,7 +19,7 @@ var monthNames = [
 	"December"
 ];
 
-var seasons = {
+const seasons = {
 	winter: {
 		name: "Winter",
 		start: new Date("December 21"),
@@ -42,22 +42,25 @@ var seasons = {
 	}
 };
 
-function shuffle(array) {
-	// Adapted from https://bost.ocks.org/mike/shuffle/
+/**
+ * Shuffles the order of items witin an array.
+ * @param {array} array - The array to be shuffled
+ */
 
-	var m = array.length, t, i;
+const shuffle = array => {
+	// Adapted from https://bost.ocks.org/mike/shuffle/
+	let m = array.length, t, i;
 
 	// While there remain elements to shuffle…
 	while (m) {
-
 		// Pick a remaining element…
 		i = Math.floor(Math.random() * m--);
-
-	    // And swap it with the current element.
-	    t = array[m];
-	    array[m] = array[i];
-	    array[i] = t;
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
 	}
+	
 	return array;
 }
 

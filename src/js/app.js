@@ -46,6 +46,7 @@ var updateAllocationLabels = function(assignment) {
 	}
 	$('.numUnassigned').html(getAssignments("unassigned").length + " raccoons are unassigned");
 }
+
 "use strict";
 
 /**** Math getters ****/
@@ -390,40 +391,40 @@ var spawnBabyRaccoons = function() {
 
 /******** End Actions *******/
 /****** GLOBAL VARIABLES ******/
-var tickRate = 500;
-var minutesPerTick = 60;
+let tickRate = 500;
+let minutesPerTick = 60;
 
-var humans = 318900000;
+let humans = 318900000;
 
-var sizeOfUnitedStates = 3537436; // square miles
-var raccoonTerritory = 1; // square miles
-var humanTerritory = sizeOfUnitedStates - raccoonTerritory;
+const sizeOfUnitedStates = 3537436; // square miles
+let raccoonTerritory = 1; // square miles
+let humanTerritory = sizeOfUnitedStates - raccoonTerritory;
 
-var foodStores = 10,
-	twigStores = 0;
+let foodStores = 10;
+let twigStores = 0;
 
-var foodGatherRate = 0.001,
-		twigsGatherRate = 0.001;
+let foodGatherRate = 0.001;
+let twigsGatherRate = 0.001;
 
-var humanGrowthRate = 5; // 7,855 net humans gained in the US per day; let's approximate to 5 per minute
+const humanGrowthRate = 5; // 7,855 net humans gained in the US per day; let's approximate to 5 per minute
 
-var startingDate = new Date("December 20, 2017 6:00:00"),
-	date = startingDate;
+let startingDate = new Date("December 20, 2017 6:00:00");
+let date = startingDate;
 
-var currentSeason;
+let currentSeason;
 
 /** Breeding variables **/
 
-var bredThisYear = false,
-	currentlyBreeding = false;
+let bredThisYear = false;
+let currentlyBreeding = false;
 
-var breedTimeRequired = 86400,
-	breedTimeElapsed = 0;
+let breedTimeRequired = 86400;
+let breedTimeElapsed = 0;
 
 /** jQuery variables **/
 
-var $statsPane,
-	$actionsPane;
+let $statsPane;
+let $actionsPane;
 
 /**** END GLOBAL VARIABLES ****/
 
@@ -433,7 +434,7 @@ const getRandomFromArray = array => {
 	return array[Math.floor(Math.random() * array.length)];
 }
 
-var monthNames = [
+const monthNames = [
 	"January",
 	"February",
 	"March",
@@ -448,7 +449,7 @@ var monthNames = [
 	"December"
 ];
 
-var seasons = {
+const seasons = {
 	winter: {
 		name: "Winter",
 		start: new Date("December 21"),
@@ -471,22 +472,25 @@ var seasons = {
 	}
 };
 
-function shuffle(array) {
-	// Adapted from https://bost.ocks.org/mike/shuffle/
+/**
+ * Shuffles the order of items witin an array.
+ * @param {array} array - The array to be shuffled
+ */
 
-	var m = array.length, t, i;
+const shuffle = array => {
+	// Adapted from https://bost.ocks.org/mike/shuffle/
+	let m = array.length, t, i;
 
 	// While there remain elements to shuffle…
 	while (m) {
-
 		// Pick a remaining element…
 		i = Math.floor(Math.random() * m--);
-
-	    // And swap it with the current element.
-	    t = array[m];
-	    array[m] = array[i];
-	    array[i] = t;
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
 	}
+	
 	return array;
 }
 
@@ -582,31 +586,45 @@ console.log(mapAsString);
 
 var mapAsImages = testMap.convertMapToImages(testMapArray);
 
-var Message = function(object) {
-	this.object = object;
-	this.date = date;
+/**
+ * Generates a new Message object. Currently, it only has a message key/value
+ * pair, but eventually this can be used to flag certain special kinds of
+ * messages in the game console window, including interactive/expandable
+ * messages.
+ * @param {Object} object - the object used to generate a new Message
+ */
 
-	console.log(this.object);
+class Message {
+	constructor (object) {
+		this.object = object;
+		this.date = date;
 
-	if (this.object.message) {
-		var output = "<div class='messageContainer'><span class='messageText'>" + this.object.message + "</span>";
-		output += "<div class='messageTimestamp'>(" + this.date.toDateString() + " " + getHoursMinutesString(this.date) + ")</div><br />";
-		output += "</div>";
+		if (this.object.message) {
+			let output =
+				`<div class="messageContainer">
+					<span class="messageText">${this.object.message}</span>
+					<div class="messageTimestamp">
+						(${this.date.toDateString()} ${getHoursMinutesString(this.date)})
+					</div>
+					<br />
+				</div>`;
 
-		if (this.object.tooltip) {
-			output += "<div class='tooltipOverlay'>";
-			for (var i = 0; i < this.object.tooltip.length; i++) {
-				for (var item in this.object.tooltip[i]) {
-					output += this.object.tooltip[i][item] + " ";
+			if (this.object.tooltip) {
+				output += `<div class="tooltipOverlay">`;
+				for (var i = 0; i < this.object.tooltip.length; i++) {
+					for (var item in this.object.tooltip[i]) {
+						output += this.object.tooltip[i][item] + " ";
+					}
+					output += "<br />";
 				}
-				output += "<br />";
+				output += "</div>";
 			}
-			output += "</div>";
-		}
 
-		$("#messageWindow").prepend(output);
+			$("#messageWindow").prepend(output);
+		}
 	}
 }
+
 /**** Progress Bar Class ****/
 
 var ProgressBar = function(id, limit) {

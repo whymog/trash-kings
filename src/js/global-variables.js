@@ -1,37 +1,37 @@
 /****** GLOBAL VARIABLES ******/
-var tickRate = 500;
-var minutesPerTick = 60;
+let tickRate = 500;
+let minutesPerTick = 60;
 
-var humans = 318900000;
+let humans = 318900000;
 
-var sizeOfUnitedStates = 3537436; // square miles
-var raccoonTerritory = 1; // square miles
-var humanTerritory = sizeOfUnitedStates - raccoonTerritory;
+const sizeOfUnitedStates = 3537436; // square miles
+let raccoonTerritory = 1; // square miles
+let humanTerritory = sizeOfUnitedStates - raccoonTerritory;
 
-var foodStores = 10,
-	twigStores = 0;
+let foodStores = 10;
+let twigStores = 0;
 
-var foodGatherRate = 0.001,
-		twigsGatherRate = 0.001;
+let foodGatherRate = 0.001;
+let twigsGatherRate = 0.001;
 
-var humanGrowthRate = 5; // 7,855 net humans gained in the US per day; let's approximate to 5 per minute
+const humanGrowthRate = 5; // 7,855 net humans gained in the US per day; let's approximate to 5 per minute
 
-var startingDate = new Date("December 20, 2017 6:00:00"),
-	date = startingDate;
+let startingDate = new Date("December 20, 2017 6:00:00");
+let date = startingDate;
 
-var currentSeason;
+let currentSeason;
 
 /** Breeding variables **/
 
-var bredThisYear = false,
-	currentlyBreeding = false;
+let bredThisYear = false;
+let currentlyBreeding = false;
 
-var breedTimeRequired = 86400,
-	breedTimeElapsed = 0;
+let breedTimeRequired = 86400;
+let breedTimeElapsed = 0;
 
 /** jQuery variables **/
 
-var $statsPane,
-	$actionsPane;
+let $statsPane;
+let $actionsPane;
 
 /**** END GLOBAL VARIABLES ****/
