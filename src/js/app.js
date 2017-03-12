@@ -735,7 +735,7 @@ const RaccoonNames = {
 	]
 };
 
-var raccoons = [
+let raccoons = [
 	{
 		id: 0,
 		name: "Raccoon1",
@@ -782,6 +782,7 @@ var raccoons = [
 		alive: true
 	}
 ];
+
 const startGame = () => {
 	defineUIElements();
 	prepUI();

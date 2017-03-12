@@ -1,4 +1,4 @@
-var raccoons = [
+let raccoons = [
 	{
 		id: 0,
 		name: "Raccoon1",
