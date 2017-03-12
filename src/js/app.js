@@ -770,7 +770,7 @@ var raccoons = [
 		alive: true
 	}
 ];
-var startGame = function() {
+const startGame = () => {
 	defineUIElements();
 	prepUI();
 	updateStatsPane();
@@ -778,7 +778,7 @@ var startGame = function() {
 	tick();
 }
 
-var defineUIElements = function () {
+const defineUIElements = () => {
 	$statsPane = 			$('.statsOutput'),
 	$statNumRaccoons = 		$('.numRaccoons .stat'),
 	$expandedNumRaccoons = 	$('.numRaccoons .expandedStat'),
@@ -792,10 +792,9 @@ var defineUIElements = function () {
 	$assignmentsPane = 		$('.assignments');
 
 	$actionsPane = $('.actions');
-	console.log($actionsPane);
 }
 
-var prepUI = function() {
+const prepUI = () => {
 	$('div.progressBar').hide();
 
 	$('input.speedControl').val(minutesPerTick);
@@ -804,21 +803,21 @@ var prepUI = function() {
 	$('.numUnassigned').html(updateAllocationLabels("unassigned"));
 }
 
-var updateStatsPane = function() {
-	$statNumRaccoons.html		( getTotalRaccoons() );
-	$expandedNumRaccoons.html 	( "Adults: " + getAdultRaccoons().length + " (" +
+const updateStatsPane = () => {
+	$statNumRaccoons.html			( getTotalRaccoons() );
+	$expandedNumRaccoons.html ( "Adults: " + getAdultRaccoons().length + " (" +
 								  	getAdultFemaleRaccoons().length + " females, " + getAdultMaleRaccoons().length + " males)<br />" +
 								  "Children: " + getChildRaccoons().length + " (" +
 								  	getChildFemaleRaccoons().length + " females, " + getChildMaleRaccoons().length + " males)<br />" );
-	$statNumHumans.html			( humans );
-	$statSeason.html			( getSeason(date) );
-	$statDate.html				( getMonthName(date.getMonth()) + "  " + date.getDate() + ", " + date.getFullYear() );
-	$statTime.html				( getHoursMinutesString(date) );
-	$statFood.html				( foodStores.toFixed(1) + " | " + getRateOfChangeFood() + "/tick");
-	$statTwigs.html				( twigStores.toFixed(1) + " | " + getRateOfChangeTwigs() + "/tick");
+	$statNumHumans.html				( humans );
+	$statSeason.html					( getSeason(date) );
+	$statDate.html						( `${getMonthName(date.getMonth())}  ${date.getDate()}, ${date.getFullYear()}` );
+	$statTime.html						( getHoursMinutesString(date) );
+	$statFood.html						( `${foodStores.toFixed(1)} | ${getRateOfChangeFood()}/tick` );
+	$statTwigs.html						( `${twigStores.toFixed(1)} | ${getRateOfChangeTwigs()}/tick` );
 }
 
-var updateActionsPane = function() {
+const updateActionsPane = () => {
 	/*
 
 	1. Check if breeding is possible
@@ -831,20 +830,18 @@ var updateActionsPane = function() {
 	*/
 
 	if (currentSeason === "Winter" && !bredThisYear) {
-		// console.log ("FOOD:", foodStores, "RACCOONS:", getAdultRaccoons() );
 		if (foodStores >= getAdultRaccoons().length * 2) {
 			// Allow "breed" button to be clicked
 			$("#breedBtn").prop("disabled", false);
 		}
 	} else {
-		// Gray out "breed" button
 		$("#breedBtn").prop("disabled", true);
 	}
 }
 
-var updateDate = function() {
+const updateDate = () => {
 	// Store the last record of the current season for comparison's sake
-	var oldSeason = getSeason(date);
+	const oldSeason = getSeason(date);
 
 	date = new Date(date.getTime() + 60000 * minutesPerTick); // Increment one minute per tick
 	currentSeason = getSeason(date);
@@ -855,26 +852,14 @@ var updateDate = function() {
 	}
 }
 
-var updateHumanPopulation = function() {
-	humans += humanGrowthRate * minutesPerTick;
-}
+const updateHumanPopulation = () => humans += humanGrowthRate * minutesPerTick;
 
-var updateStores = function() {
+const updateStores = () => {
 	// Update this so it just gets all assignments and iterates through each to update the correct var
-	var assigned = getAssignments();
+	const assigned = getAssignments();
 
 	// // Don't do anything if nobody's doin' nothin', you know?
-	// if (assigned["unassigned"] === getTotalRaccoons()) return;
-
-	// var assignments = Object.keys(assigned);
-
-	// for (var assignment in assignments) {
-	// 	if (assignment === "gatherFood") {
-	// 		foodStores += 0.001 * minutesPerTick * getAssignments(assignment).length;
-	// 	} else if (assignment === "gatherTwigs") {
-	// 		twigStores += 0.001 * minutesPerTick * getAssignments(assignment).length;
-	// 	}
-	// }
+	if (assigned["unassigned"] === getTotalRaccoons()) return;
 
 	if (getAssignments('gatherFood').length > 0) {
 		foodStores += foodGatherRate * minutesPerTick * getAssignments('gatherFood').length;
@@ -887,9 +872,9 @@ var updateStores = function() {
 	foodStores -= 0.0001 * minutesPerTick * getTotalRaccoons();
 }
 
-var checkSeasonChangeEvents = function(season) {
-	var seasonMsg = new Message({
-		message: "It is now " + season + "."
+const checkSeasonChangeEvents = season => {
+	let seasonMsg = new Message({
+		message: `It is now ${season}.`
 	});
 
 	if (season === "Winter") {
@@ -898,9 +883,9 @@ var checkSeasonChangeEvents = function(season) {
 	}
 }
 
-var tick = function() {
+const tick = () => {
 	// Increment all the things
-	window.setTimeout(function() {
+	window.setTimeout(() => {
 		// TODO: This model is inefficient. Each pane should
 		// only be updated when an event fires that changes its
 		// value. Otherwise, this doesn't scale for performance.
@@ -923,25 +908,23 @@ $(document).ready(function() {
 		breedRaccoons();
 	});
 
-	$(".statExpander").click(function(e) {
+	$(".statExpander").click(e => {
 		if ($(e.target).html() === '[v]') {
 			$(e.target).html('[^]');
 		} else {
 			$(e.target).html('[v]');
 		}
-		var chosenStat = $(e.target).data('stat');
-		var divToExpand = $('.expandedStat[data-stat=' + chosenStat + ']');
+		let chosenStat = $(e.target).data('stat');
+		let divToExpand = $(`.expandedStat[data-stat=${chosenStat}]`);
 		$(divToExpand).toggle();
 	})
 
-	$("input.speedControl").change(function() {
+	$("input.speedControl").change(() => {
 		minutesPerTick = Number($(".speedControl").val());
 		$("span.speedControl.display").html(minutesPerTick + " minutes per tick");
 	});
 
-	$("div.assignments button").on("click", function(e) {
-		allocate(e);
-	});
+	$("div.assignments button").on("click", e => allocate(e));
 
 	$(".mapDisplay").html(mapAsImages);
 
