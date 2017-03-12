@@ -7,7 +7,7 @@ var gulp = require('gulp'),
     maps = require('gulp-sourcemaps'),
      del = require('del');
 
-gulp.task('concatScripts', function() {
+gulp.task('concatScripts', () => {
     return gulp.src([
         'src/js/allocate.js',
         'src/js/getters.js',
@@ -27,7 +27,7 @@ gulp.task('concatScripts', function() {
     .pipe(gulp.dest('./dist/js'));
 });
 
-gulp.task('sass', function () {
+gulp.task('sass', () => {
   return gulp.src('./src/styles/*.scss')
     .pipe(maps.init())
     .pipe(sass().on('error', sass.logError))
@@ -35,17 +35,17 @@ gulp.task('sass', function () {
     .pipe(gulp.dest('./dist/styles'));
 });
 
-gulp.task('clean', function() {
+gulp.task('clean', () => {
   	del(['dist', 'src/js/app*.js*']);
 });
 
-gulp.task('watchFiles', function() {
+gulp.task('watchFiles', () => {
   gulp.watch('src/js/*.js', ['concatScripts', 'build']);
   gulp.watch('src/styles/*.scss', ['sass', 'build']);
   gulp.watch('src/index.html', ['build']);
 })
 
-gulp.task("build", ['concatScripts', 'sass'], function() {
+gulp.task("build", ['concatScripts', 'sass'], () => {
   	return gulp.src([ 'src/index.html',
                       'src/img/*.png' ],
                       { base: './src/'} )
