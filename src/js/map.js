@@ -1,66 +1,70 @@
-function WorldMap(map) {
-  this.legend = [
-    { name: 'grass', symbol: 'g' },
-    { name: 'trees', symbol: 't' },
-    { name: 'house', symbol: 'H' },
-    { name: 'building-small', symbol: 'Bs' },
-    { name: 'building-medium', symbol: 'Bm' },
-    { name: 'building-large', symbol: 'Bl' },
-    { name: 'road', symbol: 'r' }
-  ];
-
-  this.map = map;
-}
-
-WorldMap.prototype.setMap = function(map) {
-  var newMap = [];
-
-  for (var i = 0; i < map.length; i ++) {
-    var newRow = [];
-    for (var j = 0; j < map[i].length; j ++) {
-      newRow.push(map[i][j]);
-    }
-    newMap.push(newRow);
+class WorldMap {
+  constructor(map) {
+    this.legend = [
+      { name: 'grass', symbol: 'g' },
+      { name: 'trees', symbol: 't' },
+      { name: 'house', symbol: 'H' },
+      { name: 'building-small', symbol: 'Bs' },
+      { name: 'building-medium', symbol: 'Bm' },
+      { name: 'building-large', symbol: 'Bl' },
+      { name: 'road', symbol: 'r' }
+    ];
+    this.map = map;
   }
 
-  this.map = newMap;
-}
+  setMap(map) {
+    let newMap = [];
 
-WorldMap.prototype.convertMapToString = function(map) {
-  var mapStr = '';
-
-  for (var i = 0; i < map.length; i ++) {
-    for (var j = 0; j < map[i].length; j ++) {
-      mapStr += map[i][j];
+    for (let y = 0; y < map.length; y ++) {
+      let newRow = [];
+      for (let x = 0; x < map[y].length; x ++) {
+        newRow.push(map[y][x]);
+      }
+      newMap.push(newRow);
     }
 
-    if (i < map.length -1) {
-      mapStr += '\n';
-    }
+    this.map = newMap;
   }
 
-  return mapStr;
-}
+  convertMapToString(map) {
+    let mapStr = '';
 
-WorldMap.prototype.convertMapToImages = function(map) {
-  var newMapStr = "<div class='graphicalMap'>";
+    for (let y = 0; y < map.length; y ++) {
+      for (let x = 0; x < map[y].length; x ++) {
+        mapStr += map[y][x];
+      }
 
-  for (var i = 0; i < map.length; i ++) {
-    newMapStr += "<div class='mapRow'>";
-
-    for (var j = 0; j < map[i].length; j++) {
-      newMapStr += "<img class='mapTile' src='./img/" + map[i][j] + ".png'>";
+      if (y < map.length -1) {
+        mapStr += '\n';
+      }
     }
 
-    newMapStr += "</div>";
+    return mapStr;
   }
 
-  newMapStr += "</div>";
+  convertMapToImages(map) {
+    let newMapStr = `<div class="graphicalMap">`;
 
-  return newMapStr;
+    for (let y = 0; y < map.length; y++) {
+      newMapStr += `<div class="mapRow">`;
+
+      for (let x = 0; x < map[y].length; x++) {
+        newMapStr += `<img class="mapTile" src="./img/${map[y][x]}.png">`;
+      }
+
+      newMapStr += `</div>`;
+    }
+
+    newMapStr += `</div>`;
+
+    return newMapStr;
+  }
 }
 
-var testMapArray =
+// Test code below - this should eventually be moved to a separate file
+// if I end up deciding to use the map after all (not lookin' too likely atm)
+
+const testMapArray =
 [
   ['t', 't', 'g', 'g', 'g', 'g', 'g', 'r', 't', 't'],
   ['t', 't', 'g', 'g', 'g', 'g', 'g', 'r', 'H', 't'],
@@ -74,16 +78,16 @@ var testMapArray =
   ['g', 'r', 'g', 't', 't', 'g', 'g', 'g', 'g', 'g'],
 ];
 
-var testMap = new WorldMap(testMapArray);
+const testMap = new WorldMap(testMapArray);
 console.log(testMap);
 console.log('ASDF');
 
 console.log(testMap);
 console.log(testMap.convertMapToString(testMapArray));
 
-var mapDisplayElement = $('.mapDisplay');
-var mapAsString = testMap.convertMapToString(testMapArray);
+const mapDisplayElement = $('.mapDisplay');
+let mapAsString = testMap.convertMapToString(testMapArray);
 
 console.log(mapAsString);
 
-var mapAsImages = testMap.convertMapToImages(testMapArray);
+let mapAsImages = testMap.convertMapToImages(testMapArray);
