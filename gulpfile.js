@@ -16,6 +16,7 @@ gulp.task('concatScripts', () => {
         'src/js/helpers.js',
         'src/js/map.js',
         'src/js/messages.js',
+        'src/js/popups.js',
         'src/js/progress-bar.js',
         'src/js/raccoon-names.js',
         'src/js/raccoons.js',
@@ -37,7 +38,7 @@ gulp.task('sass', () => {
 });
 
 gulp.task('clean', () => {
-  	del(['dist', 'src/js/app*.js*']);
+  	return del(['dist', 'src/js/app*.js*']);
 });
 
 gulp.task('watchFiles', () => {
