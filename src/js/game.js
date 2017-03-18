@@ -116,8 +116,6 @@ const checkSeasonChangeEvents = season => {
 const tick = () => {
 	// Increment all the things
 
-	checkForActiveEvents();
-
 	window.setTimeout(() => {
 		// TODO: This model is inefficient. Each pane should
 		// only be updated when an event fires that changes its
@@ -126,6 +124,9 @@ const tick = () => {
 		// for an example.
 
 		updateDate();
+
+		checkForActiveEvents();
+
 		updateHumanPopulation();
 		updateStores();
 		updateStatsPane();
