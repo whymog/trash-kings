@@ -19,6 +19,7 @@ gulp.task('concatScripts', () => {
         'src/js/progress-bar.js',
         'src/js/raccoon-names.js',
         'src/js/raccoons.js',
+        'src/js/events.js',
         'src/js/game.js'
         ])
    	.pipe(maps.init())
@@ -40,8 +41,8 @@ gulp.task('clean', () => {
 });
 
 gulp.task('watchFiles', () => {
-  gulp.watch('src/js/*.js', ['concatScripts', 'build']);
-  gulp.watch('src/styles/*.scss', ['sass', 'build']);
+  gulp.watch('src/js/*.js', ['build']);
+  gulp.watch('src/styles/*.scss', ['build']);
   gulp.watch('src/index.html', ['build']);
 })
 

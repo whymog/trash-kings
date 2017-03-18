@@ -33,10 +33,12 @@ const prepUI = () => {
 
 const updateStatsPane = () => {
 	$statNumRaccoons.html			( getTotalRaccoons() );
-	$expandedNumRaccoons.html ( "Adults: " + getAdultRaccoons().length + " (" +
-								  	getAdultFemaleRaccoons().length + " females, " + getAdultMaleRaccoons().length + " males)<br />" +
-								  "Children: " + getChildRaccoons().length + " (" +
-								  	getChildFemaleRaccoons().length + " females, " + getChildMaleRaccoons().length + " males)<br />" );
+	$expandedNumRaccoons.html ( `Adults: ${getAdultRaccoons().length}
+															(${getAdultFemaleRaccoons().length} females,
+															${getAdultMaleRaccoons().length} males)<br />
+								  						Children: ${getChildRaccoons().length}
+															(${getChildFemaleRaccoons().length} females,
+															${getChildMaleRaccoons().length} males)`);
 	$statNumHumans.html				( humans );
 	$statSeason.html					( getSeason(date) );
 	$statDate.html						( `${getMonthName(date.getMonth())}  ${date.getDate()}, ${date.getFullYear()}` );
@@ -113,6 +115,9 @@ const checkSeasonChangeEvents = season => {
 
 const tick = () => {
 	// Increment all the things
+
+	checkForActiveEvents();
+
 	window.setTimeout(() => {
 		// TODO: This model is inefficient. Each pane should
 		// only be updated when an event fires that changes its
@@ -154,7 +159,7 @@ $(document).ready(function() {
 
 	$("div.assignments button").on("click", e => allocate(e));
 
-	$(".mapDisplay").html(mapAsImages);
+	// $(".mapDisplay").html(mapAsImages);
 
 	// TODO: Add a listener here for the tooltip expander/toggle/whatever it ends up being
 
